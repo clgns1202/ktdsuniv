@@ -61,5 +61,10 @@
 			class="com.ktdsuniv.admin.room.web.SeatController">
 		<property name="seatService" ref="seatService"/>		
 	</bean>
+	
+	<bean	id="categoryController"
+			class="com.ktdsuniv.admin.category.web.CategoryController">
+		<property name="categoryService" ref="categoryService" />		
+	</bean>
 
 </beans>
