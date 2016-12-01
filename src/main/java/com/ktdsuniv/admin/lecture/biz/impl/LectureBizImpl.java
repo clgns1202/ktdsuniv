@@ -4,16 +4,26 @@ import java.util.List;
 
 import com.ktdsuniv.admin.lecture.biz.LectureBiz;
 import com.ktdsuniv.admin.lecture.dao.LectureDao;
+import com.ktdsuniv.admin.room.dao.RoomDao;
 
 import common.pageVO.PageListVO;
 import common.pageVO.SearchVO;
 import common.util.pager.Pager;
 import common.util.pager.PagerFactory;
 import lecture.schema.LecturesSchema;
+import room.schema.RoomsSchema;
+import user.schema.AdminsSchema;
+import user.schema.InstructorsSchema;
+import user.schema.UsersSchema;
 
 public class LectureBizImpl implements LectureBiz {
 
 	private LectureDao lectureDao;
+	private RoomDao roomDao;
+	
+	public void setRoomDao(RoomDao roomDao) {
+		this.roomDao = roomDao;
+	}
 	
 	public void setLectureDao(LectureDao lectureDao) {
 		this.lectureDao = lectureDao;
@@ -56,5 +66,5 @@ public class LectureBizImpl implements LectureBiz {
 	public boolean updateModifyLecture(LecturesSchema lecturesSchema) {
 		return lectureDao.updateModifyLecture(lecturesSchema)>0;
 	}
-	
+
 }

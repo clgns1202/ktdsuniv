@@ -1,5 +1,7 @@
 package com.ktdsuniv.admin.lecture.web;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,11 +14,16 @@ import common.pageVO.SearchVO;
 import common.util.pager.ClassicPageExplorer;
 import common.util.pager.PageExplorer;
 import lecture.schema.LecturesSchema;
+import room.schema.RoomsSchema;
+import user.schema.AdminsSchema;
+import user.schema.InstructorsSchema;
+import user.schema.UsersSchema;
 
 @Controller
 public class LectureController {
 
 	private LectureService lectureService;
+	
 	
 	public void setLectureService(LectureService lectureService) {
 		this.lectureService = lectureService;
@@ -24,12 +31,19 @@ public class LectureController {
 	
 	/*
 	 * 강의 추가 페이지 보여주기
-	 * 유저 목록, 강사 목록, 룸 목록, 담당자 목록을 가져와야 한다.
+	 * 강사 목록, 룸 목록, 담당자 목록을 가져와야 한다.
 	 */
 	@RequestMapping("/lecture/addLecture")
-	public ModelAndView viewAddLecturePage(){
+	public ModelAndView viewAddLecturePage(SearchVO search){
 		ModelAndView view = new ModelAndView();
 		
+		PageListVO instructors = lectureService.getInstructorList(search);
+		PageListVO rooms = lectureService.getRoomsList(search);
+		PageListVO admins = lectureService.getAdminsList(search);
+		
+		view.addObject("instructors", instructors);
+		view.addObject("rooms", rooms);
+		view.addObject("admins", admins);
 		view.setViewName("/lecture/addLecture");
 		
 		return view;
