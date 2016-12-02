@@ -3,9 +3,12 @@ package com.ktdsuniv.admin.user.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.ktdsuniv.admin.user.biz.UserBiz;
 import com.ktdsuniv.admin.user.service.UserService;
 
+import common.constants.Session;
 import user.schema.AdminsSchema;
 import user.schema.InstructorsSchema;
 import user.schema.UsersSchema;
@@ -33,6 +36,17 @@ public class UserServiceImpl implements UserService {
 	public void addAdmin(AdminsSchema admins) {
 		admins.getUser().setBirthday(new Date(admins.getUser().getBirthday().getTime() + (long) ( 1000 * 60 * 60 * 9 )));
 		userBiz.addAdmin(admins);
+	}
+
+	@Override
+	public boolean adminSignIn(UsersSchema user, HttpSession session) {
+		AdminsSchema signedAdmin = userBiz.adminSignIn(user);
+		
+		if(signedAdmin != null) {
+			session.setAttribute(Session.ADMIN, signedAdmin);
+			return true;
+		}
+		return false;
 	}
 
 }

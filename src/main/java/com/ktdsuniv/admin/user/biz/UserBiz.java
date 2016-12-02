@@ -14,6 +14,8 @@ public interface UserBiz {
 
 	public void addAdmin(AdminsSchema admins);
 
+	public AdminsSchema adminSignIn(UsersSchema user);
+
 
 
 }

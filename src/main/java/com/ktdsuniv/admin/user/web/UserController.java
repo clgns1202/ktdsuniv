@@ -1,5 +1,7 @@
 package com.ktdsuniv.admin.user.web;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -58,5 +60,24 @@ public class UserController {
 		
 		userService.addAdmin(admins);
 		return "redirect:/adminMain";
+	}
+	
+	@RequestMapping("/adminSignIn")
+	public ModelAndView viewSignInPage() {
+		ModelAndView view = new ModelAndView();
+		view.setViewName("/admin/adminSignIn");
+		return view;
+	}
+	
+	@RequestMapping("/doAdminSignIn")
+	public String doSignInAction(UsersSchema user, HttpSession session) {
+		userService.adminSignIn(user, session);
+		return "redirect:/adminMain";
+	}
+	
+	@RequestMapping("/adminSignOut")
+	public String doSignOutAction(HttpSession session) {
+		session.invalidate();
+		return "redirect:/adminSignIn";
 	}
 }

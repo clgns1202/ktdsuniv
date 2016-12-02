@@ -48,4 +48,17 @@ public class UserBizImpl implements UserBiz {
 		userDao.addAdmin(admins);
 		
 	}
+
+	@Override
+	public AdminsSchema adminSignIn(UsersSchema user) {
+		String salt = userDao.getSalt(user);
+		user.setUserSalt(salt);
+		
+		String password = user.getUserPassword();
+		password = SHA256Util.getEncrypt(password, salt);
+		
+		user.setUserPassword(password);
+		
+		return userDao.adminSignIn(user);
+	}
 }

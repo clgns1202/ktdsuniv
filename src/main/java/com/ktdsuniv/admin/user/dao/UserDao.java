@@ -14,5 +14,9 @@ public interface UserDao {
 
 	public void addAdmin(AdminsSchema admins);
 
+	public String getSalt(UsersSchema user);
+
+	public AdminsSchema adminSignIn(UsersSchema user);
+
 
 }
