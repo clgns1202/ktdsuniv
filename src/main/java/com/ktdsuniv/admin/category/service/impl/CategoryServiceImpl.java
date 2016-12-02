@@ -22,6 +22,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public boolean addCategory(CategoriesSchema categoriesSchema) {
+		categoriesSchema.setLevel(categoriesSchema.getLevel()+1);
 		return categoryBiz.addCategory(categoriesSchema);
 	}
 
