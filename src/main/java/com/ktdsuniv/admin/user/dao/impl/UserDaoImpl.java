@@ -16,14 +16,6 @@ import user.schema.UsersSchema;
 public class UserDaoImpl extends MongoTemplateSupport implements UserDao {
 
 	@Override
-	public List<UsersSchema> getAllUsers() {
-		Query query = new Query();
-		query.with(new Sort(Sort.Direction.DESC, "_id"));
-		
-		return getMongo().find(query, UsersSchema.class);
-	}
-
-	@Override
 	public void addInstructor(InstructorsSchema instructors) {
 		getMongo().insert(instructors);
 	}

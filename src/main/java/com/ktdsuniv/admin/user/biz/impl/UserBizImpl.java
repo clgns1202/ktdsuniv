@@ -19,11 +19,6 @@ public class UserBizImpl implements UserBiz {
 	}
 
 	@Override
-	public List<UsersSchema> getAllUsers() {
-		return userDao.getAllUsers();
-	}
-
-	@Override
 	public void addInstructor(InstructorsSchema instructors) {
 		String salt = SHA256Util.generateSalt();
 		instructors.getUser().setUserSalt(salt);

@@ -8,16 +8,13 @@ import javax.servlet.http.HttpSession;
 import com.ktdsuniv.admin.user.biz.UserBiz;
 import com.ktdsuniv.admin.user.service.UserService;
 
-<<<<<<< HEAD
+import common.constants.Session;
 import common.mongo.biz.CommonBiz;
 import common.pageVO.PageListVO;
 import common.pageVO.SearchVO;
 import common.util.pager.Pager;
 import common.util.pager.PagerFactory;
-=======
-import common.constants.Session;
 import user.schema.AdminsSchema;
->>>>>>> 23c256a7ed6502e5ce03ccce796d117e03cb83b1
 import user.schema.InstructorsSchema;
 import user.schema.UsersSchema;
 
@@ -33,7 +30,7 @@ public class UserServiceImpl implements UserService {
 	public void setUserBiz(UserBiz userBiz) {
 		this.userBiz = userBiz;
 	}
-<<<<<<< HEAD
+
 	
 	@Override
 	public PageListVO getUserList(SearchVO search) {
@@ -57,12 +54,6 @@ public class UserServiceImpl implements UserService {
 			search.setSearchKeyName("user.userId");
 		}
 		return commonBiz.getMongoList(search, pager, InstructorsSchema.class);
-	}
-=======
-
-	@Override
-	public List<UsersSchema> getAllUsers() {
-		return userBiz.getAllUsers();
 	}
 
 	@Override
@@ -88,5 +79,4 @@ public class UserServiceImpl implements UserService {
 		return false;
 	}
 
->>>>>>> 23c256a7ed6502e5ce03ccce796d117e03cb83b1
 }

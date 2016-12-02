@@ -4,24 +4,19 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-<<<<<<< HEAD
-=======
 import org.springframework.web.bind.annotation.RequestParam;
->>>>>>> 23c256a7ed6502e5ce03ccce796d117e03cb83b1
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ktdsuniv.admin.user.service.UserService;
 
-<<<<<<< HEAD
 import common.pageVO.PageListVO;
 import common.pageVO.SearchVO;
 import common.util.pager.ClassicPageExplorer;
 import common.util.pager.PageExplorer;
-=======
 import user.schema.AdminsSchema;
 import user.schema.InstructorsSchema;
 import user.schema.UsersSchema;
->>>>>>> 23c256a7ed6502e5ce03ccce796d117e03cb83b1
+
 
 @Controller
 public class UserController {
@@ -31,9 +26,21 @@ public class UserController {
 		this.userService = userService;
 	}
 	
+	
+	/*
+	 * 관리자 메인 페이지
+	 * 일반회원, 강사, 팀, 프로젝트, 게시판, 호실, 강의 등 불러올 수 있는 리스트는 다 불러와서 최신 3개만 보여 주신 식으로 진행
+	 * 관리 기능의 경우 각 리스트별로 분리해서 진행
+	 */
 	@RequestMapping("/admin/adminMain")
-	public String test(){
-		return "/adminMain";
+	public ModelAndView viewMainPage(SearchVO search){
+		ModelAndView view = new ModelAndView();
+		PageListVO userList = userService.getUserList(search);
+		PageListVO instructorList = userService.getInstructorList(search);
+		view.addObject("userList", userList);
+		view.addObject("instructorList", instructorList);
+		view.setViewName("adminMain");
+		return view;
 	}
 	
 	@RequestMapping("/admin/instructorRegister")
@@ -84,7 +91,7 @@ public class UserController {
 		return "redirect:/admin/adminMain";
 	}
 	
-<<<<<<< HEAD
+
 	@RequestMapping("/user/list")
 	public ModelAndView viewUserList(SearchVO search){
 		ModelAndView view = new ModelAndView();
@@ -108,11 +115,10 @@ public class UserController {
 		view.setViewName("instructor/list");
 		return view;
 	}
-=======
+
 	@RequestMapping("/admin/adminSignOut")
 	public String doSignOutAction(HttpSession session) {
 		session.invalidate();
 		return "redirect:/admin/adminSignIn";
 	}
 }
->>>>>>> 23c256a7ed6502e5ce03ccce796d117e03cb83b1

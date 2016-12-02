@@ -8,8 +8,6 @@ import user.schema.UsersSchema;
 
 public interface UserBiz {
 
-	public List<UsersSchema> getAllUsers();
-
 	public void addInstructor(InstructorsSchema instructors);
 
 	public void addAdmin(AdminsSchema admins);
