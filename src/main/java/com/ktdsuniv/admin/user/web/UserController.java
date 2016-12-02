@@ -22,36 +22,36 @@ public class UserController {
 		this.userService = userService;
 	}
 	
-	@RequestMapping("/adminMain")
+	@RequestMapping("/admin/adminMain")
 	public String test(){
 		return "/adminMain";
 	}
 	
-	@RequestMapping("/instructorRegister")
+	@RequestMapping("/admin/instructorRegister")
 	public ModelAndView viewInstructorRegisterPage() {		
 		ModelAndView view = new ModelAndView();
 		view.setViewName("/instructor/instructorRegister");
 		return view;		
 	}
 	
-	@RequestMapping("/instructorDoRegister")
+	@RequestMapping("/admin/instructorDoRegister")
 	public String doInstructorRegister(UsersSchema users, @RequestParam String agency) {
 		InstructorsSchema instructors = new InstructorsSchema();
 		instructors.setAgency(agency);
 		instructors.setUser(users);
 		
 		userService.addInstructor(instructors);
-		return "redirect:/adminMain";
+		return "redirect:/admin/adminMain";
 	}
 	
-	@RequestMapping("/adminRegister")
+	@RequestMapping("/admin/adminRegister")
 	public ModelAndView viewAdminRegisterPage() {
 		ModelAndView view = new ModelAndView();
 		view.setViewName("/admin/adminRegister");
 		return view;
 	}
 	
-	@RequestMapping("/adminDoRegister")
+	@RequestMapping("/admin/adminDoRegister")
 	public String doAdminRegister(UsersSchema users, @RequestParam String department, @RequestParam String position) {
 		AdminsSchema admins = new AdminsSchema();
 		admins.setDepartment(department);
@@ -62,22 +62,22 @@ public class UserController {
 		return "redirect:/adminMain";
 	}
 	
-	@RequestMapping("/adminSignIn")
+	@RequestMapping("/admin/adminSignIn")
 	public ModelAndView viewSignInPage() {
 		ModelAndView view = new ModelAndView();
 		view.setViewName("/admin/adminSignIn");
 		return view;
 	}
 	
-	@RequestMapping("/doAdminSignIn")
+	@RequestMapping("/admin/doAdminSignIn")
 	public String doSignInAction(UsersSchema user, HttpSession session) {
 		userService.adminSignIn(user, session);
-		return "redirect:/adminMain";
+		return "redirect:/admin/adminMain";
 	}
 	
-	@RequestMapping("/adminSignOut")
+	@RequestMapping("/admin/adminSignOut")
 	public String doSignOutAction(HttpSession session) {
 		session.invalidate();
-		return "redirect:/adminSignIn";
+		return "redirect:/admin/adminSignIn";
 	}
 }
