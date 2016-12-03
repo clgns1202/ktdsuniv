@@ -11,6 +11,8 @@ public interface CategoryDao {
 	public int addCategory(CategoriesSchema categoriesSchema);
 
 	public int deleteCategory(String categoryId);
+
+	public int checkExistChild(String categoryId);
 	
 }
 

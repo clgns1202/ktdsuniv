@@ -45,30 +45,7 @@ public class CategoryBizImpl implements CategoryBiz {
 					sortedCategories.add(criteria);
 				}
 			}
-			
-			
-			
-			/*childCategories = new ArrayList<CategoriesSchema>();
-			for(int i=0; i<categories.size(); i++){
-				
-				if(categories.get(i).getParentId().equals(criteria.getId())){
-					childCategories.add(categories.get(i));
-					categories.remove(i);
-				}
-			}
-			
-			int postion = 0;
-			for(int i=0; i<sortedCategories.size(); i++){
-				if(criteria.getId().equals(sortedCategories.get(i).getId())){
-					postion = i;
-					break;
-				}
-			}
-			
-			sortedCategories.addAll(postion, childCategories);*/
-			
 		}
-		
 		
 		return sortedCategories;
 	}
@@ -81,6 +58,11 @@ public class CategoryBizImpl implements CategoryBiz {
 	@Override
 	public boolean deleteCategory(String categoryId) {
 		return categoryDao.deleteCategory(categoryId) > 0;
+	}
+
+	@Override
+	public boolean checkExistChild(String categoryId) {
+		return categoryDao.checkExistChild(categoryId) > 0;
 	}
 
 }

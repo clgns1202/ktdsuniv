@@ -1,5 +1,7 @@
 package com.ktdsuniv.admin.category.web;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -41,18 +43,22 @@ public class CategoryController {
 	
 	@RequestMapping("/category/doAddCategory")
 	@ResponseBody
-	public List<CategoriesSchema> doAddCategoryAction(CategoriesSchema categoriesSchema) {
-		
-		boolean isSuccess = categoryService.addCategory(categoriesSchema);
-	
-		return getAllCategoryAction();
+	public CategoriesSchema doAddCategoryAction(CategoriesSchema categoriesSchema) {
+		categoryService.addCategory(categoriesSchema);
+		return categoryService.getCategoryByName(categoriesSchema.getCategoryName());
 	}
 
-	@RequestMapping("/category/doDeleteCategory/{id}")
+	@RequestMapping("/category/doDeleteCategory/{categoryId}")
 	@ResponseBody
-	public String doDeleteCategoryAction(@PathVariable String id) {
-		categoryService.deleteCategory(id);
-		return "redirect:/category/categoryPage";
+	public boolean doDeleteCategoryAction(@PathVariable String categoryId) {
+		
+		boolean isExistChild = categoryService.checkExistChild(categoryId);
+		if ( !isExistChild ) {
+			return categoryService.deleteCategory(categoryId);
+		}
+		else {
+			return false;
+		}
 	}
 	
 }

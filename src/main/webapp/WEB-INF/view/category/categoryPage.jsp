@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="/AdminPage/css/decorateAdmin.css" />
+<link rel="stylesheet" type="text/css" href="/css/decorateAdmin.css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript" src="<c:url value="/js/jquery-3.1.1.js"/> "></script>
 <script type="text/javascript">
@@ -26,7 +26,7 @@
 			$("#level").val($(this).siblings(".level").val());
 			
 			console.log("click한 데이터 : "+clickedText);			
- 			console.log("form으로 전달할 데이터 : "+$("#selected_info").val());
+ 			console.log("form으로 전달할 데이터 : "+$("#parentId").val());
 			
  			//선택된 앵커 태그에 클래스를 추가한다. 			
 			if (!$(this).hasClass("selected")){				
@@ -48,27 +48,27 @@
 						,$("#categoryForm").serialize()
 						,function(data){
 							if(data!="false"){
-								var categoryId = $("#categoryId").val();
-								if($("#"+categoryId).has("ul").length){
-									$("#"+categoryId+" > ul").append("<li id='ctgr"+data+"'><a href='javascript:addCategory("+data+");'>"+$("#ctgr_input").val()+"</a></li>");
+								var categoryId = $("#"+data.parentId);
+								if(categoryId.has("ul").length){
+									categoryId.find("ul").append("<li id='"+data.id+"'><a href='javascript:addCategory("+data.id+");'>"+data.categoryName+"</a></li>");
 								}else{
-									$("#"+categoryId).append("<ul><li id='ctgr"+data+"'><a href='javascript:addCategory("+data+");'>"+$("#ctgr_input").val()+"</a></li></ul>");							
+									categoryId.append("<ul><li id='"+data.id+"'><a href='javascript:addCategory("+data.id+");'>"+data.categoryName+"</a></li></ul>");							
 								}
 								
 								//추가와 동시에 효과도 추가한다.
-								if(!$("#"+categoryId).hasClass("hasSubmenu")){
-									$("#"+categoryId).prepend("<a href='javascript:void(0);'><i class='fa fa-minus-circle'></i><i style='display:none;' class='fa fa-plus-circle'></i></a>");
-									$("#"+categoryId).children("a").not(":last").removeClass().addClass("toogle");
+								if(!categoryId.hasClass("hasSubmenu")){
+									categoryId.prepend("<a href='javascript:void(0);'><i class='fa fa-minus-circle'></i><i style='display:none;' class='fa fa-plus-circle'></i></a>");
+									categoryId.children("a").not(":last").removeClass().addClass("toogle");
 								}
-								$("#"+categoryId).addClass("hasSubmenu");
-								$("#"+categoryId).children("ul").css("border-left", "1px dashed #cccccc");
+								categoryId.addClass("hasSubmenu");
+								categoryId.children("ul").css("border-left", "1px dashed #cccccc");
 								
 									
-								$("#ctgr"+data).mouseenter(function(){
+								categoryId.mouseenter(function(){
 									$(this).children("a").css({"font-weight":"bold","color":"#336b9b"});
 								});
 									
-								$("#ctgr"+data).mouseleave(function(){
+								categoryId.mouseleave(function(){
 									$(this).children("a").css({"font-weight":"normal","color":"#428bca"});
 								});
 									
@@ -113,19 +113,20 @@
 		});
 		
 		//삭제버튼 이벤트
-		$("#ctgr_title #deleteBtn").click(function(){
-			var categoryId = $("#categoryId").val();
-			var grandParent = $("#"+categoryId).parent().parent();
-			if($("#selected_info").val() != ""){
-				$.post( "<c:url value="/category/doDeleteCategory/{id}"/>"
-					,$("#categoryForm").serialize()
-					,function(data){
-						if(data=="true"){
-							if(confirm("정말 삭제하시겠습니까?")){
+		$("#ctgr_title").on("click", "#deleteBtn", function(){
+			var categoryId = $("#parentId");
+			var grandParent = $("#parentId").parent().parent();
+			if($("#parentId").val() != ""){
+				$.post( "<c:url value="/category/doDeleteCategory/"/>"+categoryId.val()
+					, $("#categoryForm").serialize()
+					, function(data){
+						alert(data);
+						if(data+"" =="true"){
+							if( confirm("정말 삭제하시겠습니까?" )){
 								grandParent.addClass("the node child was deleted");
-								$("#"+categoryId).remove();
+								$("#"+data.parentId).remove();
 								var count = grandParent.children("ul").children("li").length;
-								if(count ==0){
+								if(count==0){
 									grandParent.children("a").children("i").remove();
 								}
 							}
@@ -184,7 +185,7 @@
 		var category = $("#ctgr"+categoryId);
 		
 		$("#categoryId").val("ctgr"+categoryId);
-		$("#selected_info").val(category.text());
+		$("#parentId").val(category.text());
 		
 		console.log("click한 데이터 : "+clickedText);			
 			console.log("form으로 전달할 데이터 : "+$("#selected_info").val());

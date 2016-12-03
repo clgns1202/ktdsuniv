@@ -12,4 +12,6 @@ public interface CategoryBiz {
 
 	public boolean deleteCategory(String categoryId);
 
+	public boolean checkExistChild(String categoryId);
+
 }

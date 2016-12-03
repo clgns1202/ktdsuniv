@@ -25,9 +25,21 @@ public class CategoryDaoImpl extends MongoTemplateSupport implements CategoryDao
 
 	@Override
 	public int deleteCategory(String categoryId) {
-		Query query = new Query(new Criteria("_id").is(categoryId));
+		Query query = new Query(new Criteria("id").is(categoryId));
 		getMongo().remove(query, CategoriesSchema.class);
 		return 1;
+	}
+
+	@Override
+	public int checkExistChild(String categoryId) {
+		Query query = new Query(new Criteria("parentId").is(categoryId));
+		int count = (int) getMongo().count(query, CategoriesSchema.class);
+		if ( count > 0 ) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 	
 }

@@ -11,5 +11,9 @@ public interface CategoryService {
 	public boolean addCategory(CategoriesSchema categoriesSchema);
 
 	public boolean deleteCategory(String categoryId);
+	
+	public CategoriesSchema getCategoryByName(String categoryName);
+
+	public boolean checkExistChild(String categoryId);
 
 }
