@@ -22,5 +22,13 @@ public interface UserService {
 
 	public PageListVO getInstructorList(SearchVO search);
 
+	public UsersSchema getUserById(String userId);
+
+	public boolean doModifyUserInfo(UsersSchema usersSchema);
+
+	public InstructorsSchema getInstructorById(String istructorId);
+
+	public boolean doModifyInstructorInfo(InstructorsSchema instructor);
+
 
 }

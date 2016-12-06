@@ -16,5 +16,9 @@ public interface UserDao {
 
 	public AdminsSchema adminSignIn(UsersSchema user);
 
+	public int doModifyUserInfo(UsersSchema usersSchema);
+
+	public int doModifyInstructorInfo(InstructorsSchema instructor);
+
 
 }

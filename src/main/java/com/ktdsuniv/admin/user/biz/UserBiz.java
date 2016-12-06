@@ -14,6 +14,10 @@ public interface UserBiz {
 
 	public AdminsSchema adminSignIn(UsersSchema user);
 
+	public boolean doModifyUserInfo(UsersSchema usersSchema);
+
+	public boolean doModifyInstructorInfo(InstructorsSchema instructor);
+
 
 
 }

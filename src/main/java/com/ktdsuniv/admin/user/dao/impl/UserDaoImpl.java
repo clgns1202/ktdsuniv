@@ -1,8 +1,7 @@
 package com.ktdsuniv.admin.user.dao.impl;
 
-import java.util.List;
+import java.util.Date;
 
-import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
@@ -47,6 +46,53 @@ public class UserDaoImpl extends MongoTemplateSupport implements UserDao {
 		Query query = new Query(criteria);
 		
 		return getMongo().findOne(query, AdminsSchema.class, "admins");
+	}
+	
+	@Override
+	public int doModifyUserInfo(UsersSchema usersSchema) {
+		Criteria criteria = new Criteria("_id");
+		criteria.is(usersSchema.getId());
+		
+		Query query = new Query(criteria);
+		
+		/*
+		 * 생성일과 아이디빼고 수정 하기
+		 */
+		UsersSchema originalUser = getMongo().findOne(query, UsersSchema.class, "users");
+		originalUser.setAddress(usersSchema.getAddress());
+		originalUser.setBirthday(usersSchema.getBirthday());
+		originalUser.setGender(usersSchema.getGender());
+		originalUser.setModifiedDate(new Date());
+		originalUser.setPhoneNumber(usersSchema.getPhoneNumber());
+		originalUser.setUserName(usersSchema.getUserName());
+		originalUser.setUserPassword(usersSchema.getUserPassword());
+		originalUser.setUserSalt(usersSchema.getUserSalt());
+		
+		getMongo().save(originalUser);
+		
+		return 1;
+	}
+	
+	@Override
+	public int doModifyInstructorInfo(InstructorsSchema instructor) {
+		Criteria criteria = new Criteria("user._id");
+		criteria.is(instructor.getUser().getId());
+		Query query = new Query(criteria);
+		
+		InstructorsSchema originalInstructor = getMongo().findOne(query, InstructorsSchema.class, "instructors");
+		originalInstructor.setAgency(instructor.getAgency());
+		originalInstructor.getUser().setAddress(instructor.getUser().getAddress());
+		originalInstructor.getUser().setBirthday(instructor.getUser().getBirthday());
+		originalInstructor.getUser().setGender(instructor.getUser().getGender());
+		originalInstructor.getUser().setModifiedDate(new Date());
+		originalInstructor.getUser().setPhoneNumber(instructor.getUser().getPhoneNumber());
+		originalInstructor.getUser().setUserName(instructor.getUser().getUserName());
+		originalInstructor.getUser().setUserPassword(instructor.getUser().getUserPassword());
+		originalInstructor.getUser().setUserSalt(instructor.getUser().getUserSalt());
+		
+		getMongo().save(originalInstructor);
+		
+		return 1;
 	}
 	
 }

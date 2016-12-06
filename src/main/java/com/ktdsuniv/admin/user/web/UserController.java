@@ -3,6 +3,7 @@ package com.ktdsuniv.admin.user.web;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -92,6 +93,9 @@ public class UserController {
 	}
 	
 
+	/*
+	 * 유저 리스트
+	 */
 	@RequestMapping("/user/list")
 	public ModelAndView viewUserList(SearchVO search){
 		ModelAndView view = new ModelAndView();
@@ -104,6 +108,44 @@ public class UserController {
 		return view;
 	}
 	
+	/*
+	 * 유저 상세보기
+	 */
+	@RequestMapping("/user/detail/{userId}")
+	public ModelAndView viewDetailUserPage(@PathVariable String userId){
+		ModelAndView view = new ModelAndView();
+		UsersSchema user = userService.getUserById(userId);
+		view.addObject("user", user);
+		view.setViewName("user/detail");
+		return view;
+	}
+	
+	/*
+	 * 유저 정보 수정
+	 */
+	@RequestMapping("/user/modify/{userId}")
+	public ModelAndView viewModifyUserPage(@PathVariable String userId){
+		ModelAndView view = new ModelAndView();
+		UsersSchema user = userService.getUserById(userId);
+		view.addObject("user", user);
+		view.setViewName("user/modify");
+		return view;
+	}
+	
+	/*
+	 * 유저정보 수정 처리
+	 */
+	@RequestMapping("/user/doModify")
+	public ModelAndView doModifyUserInfo(UsersSchema usersSchema){
+		ModelAndView view = new ModelAndView();
+		boolean isSuccess = userService.doModifyUserInfo(usersSchema);
+		view.setViewName("redirect:/user/detail/"+usersSchema.getId());
+		return view;
+	}
+	
+	/*
+	 * 강사 리스트
+	 */
 	@RequestMapping("/instructor/list")
 	public ModelAndView viewInstructorList(SearchVO search){
 		ModelAndView view = new ModelAndView();
@@ -115,7 +157,46 @@ public class UserController {
 		view.setViewName("instructor/list");
 		return view;
 	}
-
+	
+	/*
+	 * 강사 디테일
+	 */
+	@RequestMapping("/instructor/detail/{istructorId}")
+	public ModelAndView viewDetaiInstructorPage(@PathVariable String istructorId){
+		ModelAndView view = new ModelAndView();
+		InstructorsSchema instructor = userService.getInstructorById(istructorId);
+		view.addObject("instructor", instructor);
+		view.setViewName("instructor/detail");
+		return view;
+	}
+	
+	/*
+	 * 강사 수정
+	 */
+	@RequestMapping("/instructor/modify/{istructorId}")
+	public ModelAndView viewModifyinstructorPage(@PathVariable String istructorId){
+		ModelAndView view = new ModelAndView();
+		InstructorsSchema instructor = userService.getInstructorById(istructorId);
+		view.addObject("instructor", instructor);
+		view.setViewName("instructor/modify");
+		return view;
+	}
+	
+	/*
+	 * 강사 수정 처리
+	 */
+	@RequestMapping("/instructor/doModify")
+	public ModelAndView doModifyInstructorInfo(UsersSchema user, @RequestParam String agency){
+		ModelAndView view = new ModelAndView();
+		InstructorsSchema instructor = new InstructorsSchema();
+		instructor.setAgency(agency);
+		instructor.setUser(user);
+		
+		boolean isSuccess = userService.doModifyInstructorInfo(instructor);
+		view.setViewName("redirect:/instructor/detail/"+instructor.getId());
+		return view;
+	}
+	
 	@RequestMapping("/admin/adminSignOut")
 	public String doSignOutAction(HttpSession session) {
 		session.invalidate();

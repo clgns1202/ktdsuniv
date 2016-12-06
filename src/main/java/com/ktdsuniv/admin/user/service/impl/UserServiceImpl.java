@@ -78,5 +78,25 @@ public class UserServiceImpl implements UserService {
 		}
 		return false;
 	}
+	
+	@Override
+	public UsersSchema getUserById(String userId) {
+		return commonBiz.getUserById(userId);
+	}
+	
+	@Override
+	public boolean doModifyUserInfo(UsersSchema usersSchema) {
+		return userBiz.doModifyUserInfo(usersSchema);
+	}
+	
+	@Override
+	public InstructorsSchema getInstructorById(String istructorId) {
+		return commonBiz.getMongoById("_id", istructorId, InstructorsSchema.class);
+	}
+	
+	@Override
+	public boolean doModifyInstructorInfo(InstructorsSchema instructor) {
+		return userBiz.doModifyInstructorInfo(instructor);
+	}
 
 }
