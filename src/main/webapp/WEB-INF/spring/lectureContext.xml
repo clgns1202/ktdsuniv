@@ -6,6 +6,7 @@
 	<bean	id="lectureService"
 			class="com.ktdsuniv.admin.lecture.service.impl.LectureServiceImpl">
 		<property name="lectureBiz" ref="lectureBiz"/>		
+		<property name="commonBiz" ref="commonBiz"/>
 	</bean>
 
 	<bean	id="lectureBiz"
