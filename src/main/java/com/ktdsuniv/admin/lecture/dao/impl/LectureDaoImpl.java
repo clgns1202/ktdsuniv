@@ -24,7 +24,7 @@ public class LectureDaoImpl extends MongoTemplateSupport implements LectureDao {
 	@Override
 	public int deleteLecture(String letureId) {
 		Query query = new Query(new Criteria("_id").is(letureId));
-		getMongo().remove(query);
+		getMongo().remove(query, "lectures");
 		return 1;
 	}
 
@@ -81,12 +81,8 @@ public class LectureDaoImpl extends MongoTemplateSupport implements LectureDao {
 	
 	@Override
 	public int updateModifyLecture(LecturesSchema lecturesSchema) {
-		Criteria criteria = new Criteria("_id");
-		criteria.is(lecturesSchema.getId());
-		
-		Query query = new Query(criteria);
-		
-		LecturesSchema originalSchema = getMongo().findOne(query, LecturesSchema.class);
+	
+		LecturesSchema originalSchema = getMongo().findById(lecturesSchema.getId(), LecturesSchema.class, "lectures");
 		originalSchema.setLectureName(lecturesSchema.getLectureName());
 		originalSchema.setStartDate(lecturesSchema.getStartDate());
 		originalSchema.setEndDate(lecturesSchema.getEndDate());
@@ -96,6 +92,7 @@ public class LectureDaoImpl extends MongoTemplateSupport implements LectureDao {
 		originalSchema.setInstructor(lecturesSchema.getInstructor());
 		originalSchema.setAdmin(lecturesSchema.getAdmin());
 		originalSchema.setRoom(lecturesSchema.getRoom());
+		originalSchema.setLectureContent(lecturesSchema.getLectureContent());
 		
 		getMongo().save(originalSchema);
 		

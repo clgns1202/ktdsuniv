@@ -1,7 +1,7 @@
 package com.ktdsuniv.admin.lecture.web;
 
-import java.util.List;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,16 +14,12 @@ import common.pageVO.SearchVO;
 import common.util.pager.ClassicPageExplorer;
 import common.util.pager.PageExplorer;
 import lecture.schema.LecturesSchema;
-import room.schema.RoomsSchema;
-import user.schema.AdminsSchema;
-import user.schema.InstructorsSchema;
-import user.schema.UsersSchema;
 
 @Controller
 public class LectureController {
 
 	private LectureService lectureService;
-	
+	private Logger logger = LoggerFactory.getLogger(LectureController.class);
 	
 	public void setLectureService(LectureService lectureService) {
 		this.lectureService = lectureService;
@@ -52,10 +48,14 @@ public class LectureController {
 	/*
 	 * 강의 추가 작동 
 	 */
-	@RequestMapping("/lecture/doAddLectureAction")
+	@RequestMapping("/lecture/doAddLecture")
 	public ModelAndView doAddLectureAction(LecturesSchema lecturesSchema){
 		ModelAndView view = new ModelAndView();
-		
+		logger.debug("강의 이름" + lecturesSchema.getLectureName());
+		logger.debug("강의 끝" + lecturesSchema.getEndDate());
+		logger.debug("강의 시작" + lecturesSchema.getStartDate());
+		logger.debug("강의 시간ㄱ" + lecturesSchema.getEndTime());
+		logger.debug("강의 시간ㅅ" + lecturesSchema.getStartTime());
 		boolean isSuccess = lectureService.addLecture(lecturesSchema);
 		
 		view.setViewName("redirect:/lecture/list");
@@ -103,9 +103,16 @@ public class LectureController {
 	 * 수정페이지 보기
 	 */
 	@RequestMapping("/lecture/modify/{letureId}")
-	public ModelAndView viewModifyPage(@PathVariable String letureId){
+	public ModelAndView viewModifyPage(@PathVariable String letureId, SearchVO search){
 		ModelAndView view = new ModelAndView();
 		LecturesSchema lecture = lectureService.getDetailLecture(letureId);
+		PageListVO instructors = lectureService.getInstructorList(search);
+		PageListVO rooms = lectureService.getRoomsList(search);
+		PageListVO admins = lectureService.getAdminsList(search);
+		
+		view.addObject("instructors", instructors);
+		view.addObject("rooms", rooms);
+		view.addObject("admins", admins);
 		view.addObject("lecture", lecture);
 		view.setViewName("lecture/modify");
 		return view;
@@ -117,7 +124,7 @@ public class LectureController {
 	public ModelAndView doModifyLecture(LecturesSchema lecturesSchema){
 		ModelAndView view = new ModelAndView();
 		boolean isSuccess = lectureService.updateModifyLecture(lecturesSchema);
-		view.setViewName("redirect:/lecture/detail"+lecturesSchema.getId());
+		view.setViewName("redirect:/lecture/detail/"+lecturesSchema.getId());
 		return view;
 	}
 	
