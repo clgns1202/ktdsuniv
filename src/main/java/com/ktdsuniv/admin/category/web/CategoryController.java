@@ -1,6 +1,10 @@
 package com.ktdsuniv.admin.category.web;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +23,7 @@ public class CategoryController {
 
 	private CategoryService categoryService;
 	private Logger logger = LoggerFactory.getLogger(CategoryController.class);
-	
+
 	public void setCategoryService(CategoryService categoryService) {
 		this.categoryService = categoryService;
 	}
@@ -27,48 +31,59 @@ public class CategoryController {
 	@RequestMapping("/category/categoryPage")
 	public ModelAndView viewCategoryPage() {
 		List<CategoriesSchema> categories = categoryService.getAllCategoryList();
-		
+
 		ModelAndView view = new ModelAndView();
 		view.setViewName("category/categoryPage");
 		view.addObject("categories", categories);
-		
+
 		return view;
 	}
-	
+
 	@RequestMapping("/category/getAllCategory")
 	@ResponseBody
 	public List<CategoriesSchema> getAllCategoryAction() {
 		List<CategoriesSchema> categories = categoryService.getAllCategoryList();
 		return categories;
 	}
-	
+
 	@RequestMapping("/category/doAddCategory")
 	@ResponseBody
-	public CategoriesSchema doAddCategoryAction(CategoriesSchema categoriesSchema) {
+	public boolean doAddCategoryAction(CategoriesSchema categoriesSchema, HttpServletResponse res) {
+
 		categoryService.addCategory(categoriesSchema);
-		return categoryService.getCategoryByName(categoriesSchema.getCategoryName());
+		boolean isTrue = false;
+		try {
+			PrintWriter out = res.getWriter();
+			if (isTrue) {
+				out.write(categoriesSchema.getCategoryName() + "");
+			} 
+			else {
+				out.write(isTrue + "");
+			}
+			out.flush();
+			out.close();
+
+		} catch (IOException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
+		return true;
 	}
 
 	@RequestMapping("/category/doDeleteCategory/{categoryId}")
 	@ResponseBody
 	public boolean doDeleteCategoryAction(@PathVariable String categoryId) {
-		
 		boolean isExistChild = categoryService.checkExistChild(categoryId);
-		if ( !isExistChild ) {
+		if (!isExistChild) {
 			return categoryService.deleteCategory(categoryId);
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
-	
+
 	@RequestMapping("/category/doUpdateCategory/{categoryId}")
 	@ResponseBody
 	public boolean doUpadateCategoryAction(@PathVariable String categoryId, String categoryName) {
-		logger.debug("카테고리 아이디" + categoryId);
-		logger.debug("카테고리 이름" + categoryName);
 		return categoryService.UpdateCategory(categoryId, categoryName);
 	}
-	
-	
+
 }

@@ -44,14 +44,22 @@ public class CategoryDaoImpl extends MongoTemplateSupport implements CategoryDao
 
 	@Override
 	public int updateCategory(String categoryId, String categoryName) {
-		
 		CategoriesSchema category = (CategoriesSchema) getMongo().findOne(new Query(new Criteria("_id").is(categoryId)), CategoriesSchema.class);
-		
 		category.setCategoryName(categoryName);
-		
 		getMongo().save(category);
-		
 		return 1;
+	}
+
+	@Override
+	public int existName(String categoryName) {
+		Query query = new Query(new Criteria("categoryName").is(categoryName));
+		int count = (int) getMongo().count(query, CategoriesSchema.class);
+		if ( count > 0 ) { 
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 	
 }

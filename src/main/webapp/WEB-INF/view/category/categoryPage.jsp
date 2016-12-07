@@ -2,11 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="/AdminPage/css/decorateAdmin.css" />
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="/css/decorateAdmin.css" />
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>category</title>
+</head>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript" src="<c:url value="/js/jquery-3.1.1.js"/> "></script>
+<script type="text/javascript" src="/AdminPage/js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
 	$().ready(function(){
 		//카테고리 아이디를 설정한다.
@@ -47,7 +50,7 @@
 				$.post( "<c:url value="/category/doAddCategory"/>"
 						,$("#categoryForm").serialize()
 						,function(data){
-							if(data!="false"){
+							if(data!=false){
 								var categoryId = $("#"+data.parentId);
 								if(categoryId.has("ul").length){
 									categoryId.find("ul").append("<li id='"+data.id+"'><a href='javascript:addCategory("+data.id+");'>"+data.categoryName+"</a></li>");
@@ -202,9 +205,6 @@
 		}
 	}
 </script>
-<head>
-	<title>category</title>
-</head>
 <body>
 	<h3>카테고리관리</h3>
 
@@ -221,9 +221,9 @@
 				<div class="clear"></div>
 			</div>
 		
-		<input type="text" id="parentId" name="parentId">
+		<input type="hidden" id="parentId" name="parentId">
 		<!-- name:<input type="text" id="selected_info" name="selected_info"> -->
-		<input type="text" id= "level" name="level">
+		<input type="hidden" id= "level" name="level">
 		<!-- cateId:<input type="text" id="categoryId" name="categoryId"> -->
 	</form>
 	<!-- 이전 레벨과 현재 레벨이 다를 경우 ul -->
