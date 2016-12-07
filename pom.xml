@@ -26,7 +26,6 @@
 	</build>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>com.ktds</groupId>
 			<artifactId>KtdsSchema</artifactId>
