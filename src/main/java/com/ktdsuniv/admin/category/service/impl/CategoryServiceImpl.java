@@ -50,4 +50,9 @@ public class CategoryServiceImpl implements CategoryService {
 		return categoryBiz.checkExistChild(categoryId);
 	}
 
+	@Override
+	public boolean UpdateCategory(String categoryId, String categoryName) {
+		return categoryBiz.updateCategory(categoryId, categoryName);
+	}
+
 }

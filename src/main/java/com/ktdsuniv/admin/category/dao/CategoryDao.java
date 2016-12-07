@@ -13,6 +13,8 @@ public interface CategoryDao {
 	public int deleteCategory(String categoryId);
 
 	public int checkExistChild(String categoryId);
+
+	public int updateCategory(String categoryId, String categoryName);
 	
 }
 

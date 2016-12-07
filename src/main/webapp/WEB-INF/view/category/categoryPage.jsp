@@ -90,21 +90,22 @@
 		});
 		
 		//수정버튼 이벤트
-		$("#ctgr_title #modifyBtn").click(function(){
-			if($("#ctgr_input").val() != ""){
-				$.post( "<c:url value="/category/doUpdateCategory"/>"
+		$("#ctgr_title").on("click", "#modifyBtn", function(){
+			var categoryId = $("#parentId");
+			if($("#ctgr_input").val()!=""){
+				$.post( "<c:url value="/category/doUpdateCategory/"/>"+categoryId.val()
 						,$("#categoryForm").serialize()
 						,function(data){
-							if(data=="true"){
-								var categoryId = $("#categoryId").val();
-								$("#"+categoryId).children("a:nth-child(2)").text($("#ctgr_input").val());
+							if(data+""=="true"){
+								var categoryId = $("#"+data.parentId);
+								$("#"+data.parentId).children("a:nth-child(2)").text($("#ctgr_input").val());
 							}
 							else{
 								alert("중복되는 이름은 사용할 수 없습니다.");
 							}
 						});
 			}
-			else if($("#selected_info").val()==""){
+			else if($("#parentId").val()==""){
 				alert("수정할 파일을 선택해주세요.");
 			}
 			else{
@@ -120,7 +121,6 @@
 				$.post( "<c:url value="/category/doDeleteCategory/"/>"+categoryId.val()
 					, $("#categoryForm").serialize()
 					, function(data){
-						alert(data);
 						if(data+"" =="true"){
 							if( confirm("정말 삭제하시겠습니까?" )){
 								grandParent.addClass("the node child was deleted");

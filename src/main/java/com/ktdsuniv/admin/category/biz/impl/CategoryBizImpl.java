@@ -65,4 +65,9 @@ public class CategoryBizImpl implements CategoryBiz {
 		return categoryDao.checkExistChild(categoryId) > 0;
 	}
 
+	@Override
+	public boolean updateCategory(String categoryId, String categoryName) {
+		return categoryDao.updateCategory(categoryId, categoryName) > 0;
+	}
+
 }

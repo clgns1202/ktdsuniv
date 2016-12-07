@@ -16,4 +16,6 @@ public interface CategoryService {
 
 	public boolean checkExistChild(String categoryId);
 
+	public boolean UpdateCategory(String categoryId, String categoryName);
+
 }

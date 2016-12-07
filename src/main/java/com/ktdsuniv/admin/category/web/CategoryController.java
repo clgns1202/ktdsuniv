@@ -1,9 +1,9 @@
 package com.ktdsuniv.admin.category.web;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
-
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +18,7 @@ import category.schema.CategoriesSchema;
 public class CategoryController {
 
 	private CategoryService categoryService;
+	private Logger logger = LoggerFactory.getLogger(CategoryController.class);
 	
 	public void setCategoryService(CategoryService categoryService) {
 		this.categoryService = categoryService;
@@ -60,5 +61,14 @@ public class CategoryController {
 			return false;
 		}
 	}
+	
+	@RequestMapping("/category/doUpdateCategory/{categoryId}")
+	@ResponseBody
+	public boolean doUpadateCategoryAction(@PathVariable String categoryId, String categoryName) {
+		logger.debug("카테고리 아이디" + categoryId);
+		logger.debug("카테고리 이름" + categoryName);
+		return categoryService.UpdateCategory(categoryId, categoryName);
+	}
+	
 	
 }

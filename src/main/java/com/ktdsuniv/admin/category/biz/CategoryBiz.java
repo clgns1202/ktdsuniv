@@ -14,4 +14,6 @@ public interface CategoryBiz {
 
 	public boolean checkExistChild(String categoryId);
 
+	public boolean updateCategory(String categoryId, String categoryName);
+
 }
