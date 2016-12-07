@@ -36,10 +36,10 @@ public class UserServiceImpl implements UserService {
 	public PageListVO getUserList(SearchVO search) {
 		Pager pager = PagerFactory.getPager(Pager.OTHER);
 		if(search.getSearchType()==1){
-			search.setSearchKeyName("userName");
+			search.setSearchKeyName("userId");
 		}
 		else if(search.getSearchType()==2) {
-			search.setSearchKeyName("userId");
+			search.setSearchKeyName("userName");
 		}
 		return commonBiz.getMongoList(search, pager, UsersSchema.class);
 	}
@@ -48,10 +48,10 @@ public class UserServiceImpl implements UserService {
 	public PageListVO getInstructorList(SearchVO search) {
 		Pager pager = PagerFactory.getPager(Pager.OTHER);
 		if(search.getSearchType()==1){
-			search.setSearchKeyName("user.userName");
+			search.setSearchKeyName("user.userId");
 		}
 		else if(search.getSearchType()==2) {
-			search.setSearchKeyName("user.userId");
+			search.setSearchKeyName("user.userName");
 		}
 		return commonBiz.getMongoList(search, pager, InstructorsSchema.class);
 	}
@@ -97,6 +97,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean doModifyInstructorInfo(InstructorsSchema instructor) {
 		return userBiz.doModifyInstructorInfo(instructor);
+	}
+	
+	@Override
+	public boolean doDeleteUserInfo(List<String> users) {
+		return userBiz.doDeleteUserInfo(users);
+	}
+	
+	@Override
+	public boolean doDeleteInstructorInfo(List<String> users) {
+		return userBiz.doDeleteInstructorInfo(users);
 	}
 
 }

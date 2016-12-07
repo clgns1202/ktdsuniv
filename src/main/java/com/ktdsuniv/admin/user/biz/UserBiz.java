@@ -18,6 +18,10 @@ public interface UserBiz {
 
 	public boolean doModifyInstructorInfo(InstructorsSchema instructor);
 
+	public boolean doDeleteUserInfo(List<String> users);
+
+	public boolean doDeleteInstructorInfo(List<String> users);
+
 
 
 }

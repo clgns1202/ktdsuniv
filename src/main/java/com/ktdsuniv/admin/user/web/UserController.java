@@ -1,5 +1,7 @@
 package com.ktdsuniv.admin.user.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -94,7 +96,8 @@ public class UserController {
 	
 
 	/*
-	 * 유저 리스트
+	 * 유저 리스트 
+	 * 완성
 	 */
 	@RequestMapping("/user/list")
 	public ModelAndView viewUserList(SearchVO search){
@@ -103,6 +106,7 @@ public class UserController {
 		PageExplorer pageExplorer = new ClassicPageExplorer(userList.getPager());
 		String pager = pageExplorer.getPagingList("pageNumber", "[@]", "<<", ">>", "searchForm");
 		view.addObject("paging", pager);
+		view.addObject("search", search);
 		view.addObject("userList", userList);
 		view.setViewName("user/list");
 		return view;
@@ -110,6 +114,7 @@ public class UserController {
 	
 	/*
 	 * 유저 상세보기
+	 * 완성
 	 */
 	@RequestMapping("/user/detail/{userId}")
 	public ModelAndView viewDetailUserPage(@PathVariable String userId){
@@ -122,6 +127,7 @@ public class UserController {
 	
 	/*
 	 * 유저 정보 수정
+	 * 완성
 	 */
 	@RequestMapping("/user/modify/{userId}")
 	public ModelAndView viewModifyUserPage(@PathVariable String userId){
@@ -134,12 +140,25 @@ public class UserController {
 	
 	/*
 	 * 유저정보 수정 처리
+	 * 만듬
 	 */
 	@RequestMapping("/user/doModify")
 	public ModelAndView doModifyUserInfo(UsersSchema usersSchema){
 		ModelAndView view = new ModelAndView();
 		boolean isSuccess = userService.doModifyUserInfo(usersSchema);
 		view.setViewName("redirect:/user/detail/"+usersSchema.getId());
+		return view;
+	}
+	
+	/*
+	 * 유저정보 삭제
+	 * 완성
+	 */
+	@RequestMapping("/user/doDelete")
+	public ModelAndView doDeleteUserInfo(@RequestParam List<String> users){
+		ModelAndView view = new ModelAndView();
+		boolean isSuccess = userService.doDeleteUserInfo(users);
+		view.setViewName("redirect:/user/list");
 		return view;
 	}
 	
@@ -153,6 +172,7 @@ public class UserController {
 		PageExplorer pageExplorer = new ClassicPageExplorer(instructorList.getPager());
 		String pager = pageExplorer.getPagingList("pageNumber", "[@]", "<<", ">>", "searchForm");
 		view.addObject("paging", pager);
+		view.addObject("search", search);
 		view.addObject("instructorList", instructorList);
 		view.setViewName("instructor/list");
 		return view;
@@ -196,6 +216,18 @@ public class UserController {
 		view.setViewName("redirect:/instructor/detail/"+instructor.getId());
 		return view;
 	}
+	
+	/*
+	 * 강사정보 삭제
+	 */
+	@RequestMapping("/instructor/doDelete")
+	public ModelAndView doDeleteInstructorInfo(@RequestParam List<String> users){
+		ModelAndView view = new ModelAndView();
+		boolean isSuccess = userService.doDeleteInstructorInfo(users);
+		view.setViewName("redirect:/instructor/list");
+		return view;
+	}
+	
 	
 	@RequestMapping("/admin/adminSignOut")
 	public String doSignOutAction(HttpSession session) {

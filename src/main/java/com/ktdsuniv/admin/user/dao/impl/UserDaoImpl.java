@@ -1,6 +1,7 @@
 package com.ktdsuniv.admin.user.dao.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -65,8 +66,10 @@ public class UserDaoImpl extends MongoTemplateSupport implements UserDao {
 		originalUser.setModifiedDate(new Date());
 		originalUser.setPhoneNumber(usersSchema.getPhoneNumber());
 		originalUser.setUserName(usersSchema.getUserName());
-		originalUser.setUserPassword(usersSchema.getUserPassword());
-		originalUser.setUserSalt(usersSchema.getUserSalt());
+		if(usersSchema.getUserPassword() != null){
+			originalUser.setUserPassword(usersSchema.getUserPassword());
+			originalUser.setUserSalt(usersSchema.getUserSalt());
+		}
 		
 		getMongo().save(originalUser);
 		
@@ -87,10 +90,39 @@ public class UserDaoImpl extends MongoTemplateSupport implements UserDao {
 		originalInstructor.getUser().setModifiedDate(new Date());
 		originalInstructor.getUser().setPhoneNumber(instructor.getUser().getPhoneNumber());
 		originalInstructor.getUser().setUserName(instructor.getUser().getUserName());
-		originalInstructor.getUser().setUserPassword(instructor.getUser().getUserPassword());
-		originalInstructor.getUser().setUserSalt(instructor.getUser().getUserSalt());
+		if(instructor.getUser().getUserPassword() != null){
+			originalInstructor.getUser().setUserPassword(instructor.getUser().getUserPassword());
+			originalInstructor.getUser().setUserSalt(instructor.getUser().getUserSalt());
+		}
 		
 		getMongo().save(originalInstructor);
+		
+		return 1;
+	}
+	
+	@Override
+	public int doDeleteUserInfo(List<String> users) {
+
+		for (String user : users) {
+			Criteria criteria = new Criteria("id");
+			criteria.is(user);
+			
+			Query query = new Query(criteria);
+			getMongo().remove(query, UsersSchema.class, "users");
+		}
+		
+		return 1;
+	}
+	
+	@Override
+	public int doDeleteInstructorInfo(List<String> users) {
+		for (String user : users) {
+			Criteria criteria = new Criteria("user.id");
+			criteria.is(user);
+			
+			Query query = new Query(criteria);
+			getMongo().remove(query, InstructorsSchema.class, "instructors");
+		}
 		
 		return 1;
 	}

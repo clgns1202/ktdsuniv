@@ -60,13 +60,16 @@ public class UserBizImpl implements UserBiz {
 	@Override
 	public boolean doModifyUserInfo(UsersSchema usersSchema) {
 		
-		String salt = SHA256Util.generateSalt();
-		usersSchema.setUserSalt(salt);
 		
-		String password = usersSchema.getUserPassword();
-		password = SHA256Util.getEncrypt(password, salt);
-		
-		usersSchema.setUserPassword(password);
+		if(usersSchema.getUserPassword() != null){
+			String salt = SHA256Util.generateSalt();
+			usersSchema.setUserSalt(salt);
+			
+			String password = usersSchema.getUserPassword();
+			password = SHA256Util.getEncrypt(password, salt);
+			
+			usersSchema.setUserPassword(password);
+		}
 		
 		
 		return userDao.doModifyUserInfo(usersSchema)>0;
@@ -74,15 +77,29 @@ public class UserBizImpl implements UserBiz {
 	
 	@Override
 	public boolean doModifyInstructorInfo(InstructorsSchema instructor) {
-		String salt = SHA256Util.generateSalt();
-		instructor.getUser().setUserSalt(salt);
 		
-		String password = instructor.getUser().getUserPassword();
-		password = SHA256Util.getEncrypt(password, salt);
-		
-		instructor.getUser().setUserPassword(password);
+		if(instructor.getUser().getUserPassword() != null){
+			String salt = SHA256Util.generateSalt();
+			instructor.getUser().setUserSalt(salt);
+			
+			String password = instructor.getUser().getUserPassword();
+			password = SHA256Util.getEncrypt(password, salt);
+			
+			instructor.getUser().setUserPassword(password);
+		}
 		
 		
 		return userDao.doModifyInstructorInfo(instructor)>0;
 	}
+	
+	@Override
+	public boolean doDeleteUserInfo(List<String> users) {
+		return userDao.doDeleteUserInfo(users)>0;
+	}
+	
+	@Override
+	public boolean doDeleteInstructorInfo(List<String> users) {
+		return userDao.doDeleteInstructorInfo(users)>0;
+	}
+	
 }

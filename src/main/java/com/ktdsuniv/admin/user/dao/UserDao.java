@@ -20,5 +20,9 @@ public interface UserDao {
 
 	public int doModifyInstructorInfo(InstructorsSchema instructor);
 
+	public int doDeleteUserInfo(List<String> users);
+
+	public int doDeleteInstructorInfo(List<String> users);
+
 
 }
