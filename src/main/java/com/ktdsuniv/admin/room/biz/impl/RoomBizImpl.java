@@ -26,4 +26,9 @@ public class RoomBizImpl implements RoomBiz {
 		return roomDao.roomList();
 	}
 
+	@Override
+	public void deleteRoom(String id) {
+		roomDao.deleteRoom(id);
+	}
+
 }

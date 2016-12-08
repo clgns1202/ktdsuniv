@@ -10,4 +10,6 @@ public interface RoomDao {
 
 	public List<RoomsSchema> roomList();
 
+	public void deleteRoom(String id);
+
 }

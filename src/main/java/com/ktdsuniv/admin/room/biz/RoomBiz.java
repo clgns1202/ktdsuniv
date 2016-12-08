@@ -10,4 +10,6 @@ public interface RoomBiz {
 
 	public List<RoomsSchema> roomList();
 
+	public void deleteRoom(String id);
+
 }
