@@ -14,6 +14,7 @@
 		<config>src/main/webapp/WEB-INF/spring/lectureContext.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/roomContext.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/commonContext.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/attendanceContext.xml</config>
 	</configs>
 	<autoconfigs>
 		<config>src/main/webapp/WEB-INF/spring/mongoContext.xml</config>
