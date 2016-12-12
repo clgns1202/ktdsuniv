@@ -51,20 +51,21 @@
 						,$("#categoryForm").serialize()
 						,function(data){
 							var categoryId = $("#"+data.parentId);
-							if (categoryId.text() == "0") {
+							var level = data.level;
+							if (categoryId.val("0")) {
 								console.log("123");
-								categoryId.append("<ul><li id='"+data.id+"'><a href='javascript:addCategory("+data.id+");'>"+data.categoryName+"</a></li></ul>");
+								categoryId.append("<ul><li id='"+data.id+"'><input type='hidden' class='level' value='"+level+"'><a href='javascritp:void(0);'>"+data.categoryName+"</a></li></ul>");
+								/* categoryId.append("<ul><li id='"+data.id+"'><a href='javascript:addCategory("+data.id+");'>"+data.categoryName+"</a></li></ul>"); */
 							}
 							else if (categoryId.find("ul")) {
 								/* <input type="hidden" class="level" value='"+data.level+"'> */
-								var level = data.level;
-								console.log(level);
 								categoryId.children("ul").append("<li id='"+data.id+"'><input type='hidden' class='level' value='"+level+"'><a href='javascritp:void(0);'>"+data.categoryName+"</a></li>");
 								/* categoryId.children("ul").append("<li id='"+data.id+"'><a href='javascript:addCategory("+data.id+");'>"+data.categoryName+"</a></li>"); */
 							}
 							else {
 								console.log("789");
-								categoryId.append("<ul><li id='"+data.id+"'><a href='javascript:addCategory("+data.id+");'>"+data.categoryName+"</a></li></ul>");							
+								categoryId.append("<ul><li id='"+data.id+"'><input type='hidden' class='level' value='"+level+"'><a href='javascritp:void(0);'>"+data.categoryName+"</a></li></ul>");
+								/* categoryId.append("<ul><li id='"+data.id+"'><a href='javascript:addCategory("+data.id+");'>"+data.categoryName+"</a></li></ul>");		 */					
 							}
 								
 							//추가와 동시에 효과도 추가한다.
