@@ -18,9 +18,9 @@
 		$("#level").val("0");
 		
 		//카테고리 이름을 클릭했을 때 이벤트		
-		$("#ctgr_content li a").click(function(){
+		$("#ctgr_content").on("click","li a", function(){
 			//현재 태그의 부모(li)의 id를 가져온다.
-			clickedText = $(this).parents().attr("id");
+			clickedText=$(this).parents().attr("id");
 			
 			//hidden input의 value에 id를 넣는다.
 			$("#parentId").val(clickedText);
@@ -50,44 +50,48 @@
 				$.post( "<c:url value="/category/doAddCategory"/>"
 						,$("#categoryForm").serialize()
 						,function(data){
-							if(data!=false){
-								var categoryId = $("#"+data.parentId);
-								if(categoryId.has("ul").length){
-									categoryId.find("ul").append("<li id='"+data.id+"'><a href='javascript:addCategory("+data.id+");'>"+data.categoryName+"</a></li>");
-								}else{
-									categoryId.append("<ul><li id='"+data.id+"'><a href='javascript:addCategory("+data.id+");'>"+data.categoryName+"</a></li></ul>");							
-								}
-								
-								//추가와 동시에 효과도 추가한다.
-								if(!categoryId.hasClass("hasSubmenu")){
-									categoryId.prepend("<a href='javascript:void(0);'><i class='fa fa-minus-circle'></i><i style='display:none;' class='fa fa-plus-circle'></i></a>");
-									categoryId.children("a").not(":last").removeClass().addClass("toogle");
-								}
-								categoryId.addClass("hasSubmenu");
-								categoryId.children("ul").css("border-left", "1px dashed #cccccc");
-								
-									
-								categoryId.mouseenter(function(){
-									$(this).children("a").css({"font-weight":"bold","color":"#336b9b"});
-								});
-									
-								categoryId.mouseleave(function(){
-									$(this).children("a").css({"font-weight":"normal","color":"#428bca"});
-								});
-									
-								$("#ctgr_content ul li.hasSubmenu a.toogle").click(function(){
-										// 클릭하면 하위 ul은 toggle 효과를 준다.
-										$(this).closest("li").children("ul").toggle("slow");
-										//toogle 클래스가 추가된 a 태그의 하위 i태그에 toggle효과를 준다.
-										$(this).children("i").toggle();
-									 	return false;
-								});	
+							var categoryId = $("#"+data.parentId);
+							if (categoryId.text() == "0") {
+								console.log("123");
+								categoryId.append("<ul><li id='"+data.id+"'><a href='javascript:addCategory("+data.id+");'>"+data.categoryName+"</a></li></ul>");
 							}
-							else{
-								alert("중복되는 이름은 사용할 수 없습니다.");
+							else if (categoryId.find("ul")) {
+								/* <input type="hidden" class="level" value='"+data.level+"'> */
+								var level = data.level;
+								console.log(level);
+								categoryId.children("ul").append("<li id='"+data.id+"'><input type='hidden' class='level' value='"+level+"'><a href='javascritp:void(0);'>"+data.categoryName+"</a></li>");
+								/* categoryId.children("ul").append("<li id='"+data.id+"'><a href='javascript:addCategory("+data.id+");'>"+data.categoryName+"</a></li>"); */
 							}
+							else {
+								console.log("789");
+								categoryId.append("<ul><li id='"+data.id+"'><a href='javascript:addCategory("+data.id+");'>"+data.categoryName+"</a></li></ul>");							
+							}
+								
+							//추가와 동시에 효과도 추가한다.
+							if(!categoryId.hasClass("hasSubmenu")){
+								categoryId.prepend("<a href='javascript:void(0);'><i class='fa fa-minus-circle'></i><i style='display:none;' class='fa fa-plus-circle'></i></a>");
+								categoryId.children("a").not(":last").removeClass().addClass("toogle");
+							}
+							categoryId.addClass("hasSubmenu");
+							categoryId.children("ul").css("border-left", "1px dashed #cccccc");
+							categoryId.mouseenter(function(){
+								$(this).children("a").css({"font-weight":"bold","color":"#336b9b"});
+							});
+									
+							categoryId.mouseleave(function(){
+								$(this).children("a").css({"font-weight":"normal","color":"#428bca"});
+							});
+									
+							$("#ctgr_content ul li.hasSubmenu a.toogle").click(function(){
+								// 클릭하면 하위 ul은 toggle 효과를 준다.
+								$(this).closest("li").children("ul").toggle("slow");
+								//toogle 클래스가 추가된 a 태그의 하위 i태그에 toggle효과를 준다.
+								$(this).children("i").toggle();
+								return false;
+							});	
 				});
-			}else{
+			}
+			else{
 				alert("카테고리 이름을 입력해주세요.");				
 			}
 		});
@@ -99,13 +103,9 @@
 				$.post( "<c:url value="/category/doUpdateCategory/"/>"+categoryId.val()
 						,$("#categoryForm").serialize()
 						,function(data){
-							if(data+""=="true"){
-								var categoryId = $("#"+data.parentId);
-								$("#"+data.parentId).children("a:nth-child(2)").text($("#ctgr_input").val());
-							}
-							else{
-								alert("중복되는 이름은 사용할 수 없습니다.");
-							}
+								var categoryId = $("#"+data.id);
+									categoryId.find("a").eq(1).text(data.categoryName);
+									categoryId.children("a:nth-child(2)").text($("#ctgr_input").val());
 						});
 			}
 			else if($("#parentId").val()==""){
@@ -124,7 +124,7 @@
 				$.post( "<c:url value="/category/doDeleteCategory/"/>"+categoryId.val()
 					, $("#categoryForm").serialize()
 					, function(data){
-						if(data+"" =="true"){
+						if(data!=false){
 							if( confirm("정말 삭제하시겠습니까?" )){
 								grandParent.addClass("the node child was deleted");
 								$("#"+data.parentId).remove();
@@ -191,7 +191,7 @@
 		$("#parentId").val(category.text());
 		
 		console.log("click한 데이터 : "+clickedText);			
-			console.log("form으로 전달할 데이터 : "+$("#selected_info").val());
+		console.log("form으로 전달할 데이터 : "+$("#selected_info").val());
 		//선택된 태그에 클래스를 표시한다. 			
 	
 		if (!category.hasClass("selected")){				
@@ -221,28 +221,28 @@
 				<div class="clear"></div>
 			</div>
 		
-		<input type="hidden" id="parentId" name="parentId">
+		<input type="text" id="parentId" name="parentId">
 		<!-- name:<input type="text" id="selected_info" name="selected_info"> -->
-		<input type="hidden" id= "level" name="level">
+		<input type="text" id= "level" name="level">
 		<!-- cateId:<input type="text" id="categoryId" name="categoryId"> -->
 	</form>
 	<!-- 이전 레벨과 현재 레벨이 다를 경우 ul -->
 	<div id="ctgr_content" >
 	<ul id='start_tree'>
-		<li id='ctgr0'><a href='javascript:void(0);'>ROOT</a>
+		<li id='ctgr0'><input type="hidden" class="level" value="0"><a href='javascript:void(0);'>ROOT</a>
 		<c:set var='pr' value='0' />
 		<c:forEach items='${categories }' var='category' >
  	
-		<c:set var='nr' value='${category.level }' />
-			<c:choose>
-			<c:when test='${pr lt nr }'>
+			<c:set var='nr' value='${category.level }' />
+				<c:choose>
+				<c:when test='${pr lt nr }'>
 					<ul><li id='${category.id }'><input type="hidden" class="level" value="${category.level }"><a href='javascript:void(0);'>${category.categoryName}</a></c:when>
-			<c:when test='${pr gt nr }'>
+				<c:when test='${pr gt nr }'>
 					<c:forEach begin='1' end='${pr-nr }' step='1'>
-					</li></ul>
+						</li></ul>
 					</c:forEach>
 					<li id='${category.id }'><input type="hidden" class="level" value="${category.level }"><a href='javascript:void(0);'>${category.categoryName}</a></c:when>
-			<c:otherwise>
+					<c:otherwise>
 					</li>
 					<li id='${category.id }'><input type="hidden" class="level" value="${category.level }"><a href='javascript:void(0);'>${category.categoryName}</a></c:otherwise>
 			</c:choose>

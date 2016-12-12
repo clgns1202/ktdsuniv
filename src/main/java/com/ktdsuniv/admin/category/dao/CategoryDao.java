@@ -17,6 +17,7 @@ public interface CategoryDao {
 	public int updateCategory(String categoryId, String categoryName);
 
 	public int existName(String categoryName);
+
 	
 }
 

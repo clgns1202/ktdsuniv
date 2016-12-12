@@ -73,7 +73,6 @@ public class CategoryBizImpl implements CategoryBiz {
 
 	@Override
 	public boolean updateCategory(String categoryId, String categoryName) {
-		
 		if ( categoryDao.existName(categoryName) == 0 ) {
 			return categoryDao.updateCategory(categoryId, categoryName) > 0;
 		}

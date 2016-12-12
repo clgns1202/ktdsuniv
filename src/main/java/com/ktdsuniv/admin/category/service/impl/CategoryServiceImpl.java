@@ -11,10 +11,10 @@ import common.mongo.biz.CommonBiz;
 public class CategoryServiceImpl implements CategoryService {
 	
 	private CategoryBiz categoryBiz;
-	private CommonBiz commongBiz;
+	private CommonBiz commonBiz;
 	
-	public void setCommongBiz(CommonBiz commongBiz) {
-		this.commongBiz = commongBiz;
+	public void setCommonBiz(CommonBiz commonBiz) {
+		this.commonBiz = commonBiz;
 	}
 
 	public void setCategoryBiz(CategoryBiz categoryBiz) {
@@ -42,7 +42,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public CategoriesSchema getCategoryByName(String categoryName) {
-		return commongBiz.getMongoById("categoryName", categoryName, CategoriesSchema.class);
+		return commonBiz.getMongoById("categoryName", categoryName, CategoriesSchema.class);
 	}
 
 	@Override
@@ -53,6 +53,11 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public boolean UpdateCategory(String categoryId, String categoryName) {
 		return categoryBiz.updateCategory(categoryId, categoryName);
+	}
+
+	@Override
+	public CategoriesSchema getCategoryById(String categoryId) {
+		return commonBiz.getMongoById("id", categoryId, CategoriesSchema.class);
 	}
 
 }

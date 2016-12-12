@@ -6,6 +6,7 @@
 	<bean	id="categoryService"
 			class="com.ktdsuniv.admin.category.service.impl.CategoryServiceImpl">
 		<property name="categoryBiz" ref="categoryBiz" />
+		<property name="commonBiz" ref="commonBiz"></property>
 	</bean>
 	
 	<bean	id="categoryBiz"

@@ -1,10 +1,6 @@
 package com.ktdsuniv.admin.category.web;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,25 +44,13 @@ public class CategoryController {
 
 	@RequestMapping("/category/doAddCategory")
 	@ResponseBody
-	public boolean doAddCategoryAction(CategoriesSchema categoriesSchema, HttpServletResponse res) {
-
-		categoryService.addCategory(categoriesSchema);
-		boolean isTrue = false;
-		try {
-			PrintWriter out = res.getWriter();
-			if (isTrue) {
-				out.write(categoriesSchema.getCategoryName() + "");
-			} 
-			else {
-				out.write(isTrue + "");
-			}
-			out.flush();
-			out.close();
-
-		} catch (IOException e) {
-			throw new RuntimeException(e.getMessage(), e);
+	public CategoriesSchema doAddCategoryAction(CategoriesSchema categoriesSchema) {
+		CategoriesSchema categories = null;
+		if(categoryService.addCategory(categoriesSchema)){
+			categories = categoryService.getCategoryByName(categoriesSchema.getCategoryName());
 		}
-		return true;
+		
+		return categories;
 	}
 
 	@RequestMapping("/category/doDeleteCategory/{categoryId}")
@@ -82,8 +66,13 @@ public class CategoryController {
 
 	@RequestMapping("/category/doUpdateCategory/{categoryId}")
 	@ResponseBody
-	public boolean doUpadateCategoryAction(@PathVariable String categoryId, String categoryName) {
-		return categoryService.UpdateCategory(categoryId, categoryName);
+	public CategoriesSchema doUpadateCategoryAction(@PathVariable String categoryId, String categoryName) {
+		CategoriesSchema categories = null;
+		if ( categoryService.UpdateCategory(categoryId, categoryName) ) { 
+			categories = categoryService.getCategoryByName(categoryName);
+		}
+
+		return categories;
 	}
 
 }

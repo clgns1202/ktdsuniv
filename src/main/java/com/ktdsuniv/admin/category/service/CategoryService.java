@@ -18,4 +18,6 @@ public interface CategoryService {
 
 	public boolean UpdateCategory(String categoryId, String categoryName);
 
+	public CategoriesSchema getCategoryById(String categoryId);
+
 }

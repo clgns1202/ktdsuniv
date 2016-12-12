@@ -38,5 +38,15 @@
 			class="common.mongo.logger.MongoLogger">
 		<property name="mongoDBLogger" ref="mongoDBLogger" />
 	</bean>
+	
+	<bean	id="commonBiz"
+			class="common.mongo.biz.impl.CommonBizImpl">
+			<property name="commonDao" ref="commonDao"></property>
+	</bean>
+	
+	<bean	id="commonDao"
+			class="common.mongo.dao.impl.CommonDaoImpl">
+			<property name="mongoTemplate" ref="mongoTemplate"></property>		
+	</bean>
 
 </beans>

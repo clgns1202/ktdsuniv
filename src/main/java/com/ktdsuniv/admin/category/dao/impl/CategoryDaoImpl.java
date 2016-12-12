@@ -61,5 +61,5 @@ public class CategoryDaoImpl extends MongoTemplateSupport implements CategoryDao
 			return 0;
 		}
 	}
-	
+
 }
