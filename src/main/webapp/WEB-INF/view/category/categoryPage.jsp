@@ -125,18 +125,13 @@
 				$.post( "<c:url value="/category/doDeleteCategory/"/>"+categoryId.val()
 					, $("#categoryForm").serialize()
 					, function(data){
-						if(data!=false){
-							if( confirm("정말 삭제하시겠습니까?" )){
-								grandParent.addClass("the node child was deleted");
-								$("#"+data.parentId).remove();
-								var count = grandParent.children("ul").children("li").length;
-								if(count==0){
-									grandParent.children("a").children("i").remove();
-								}
+						var categoryId = $("#"+data.id);
+						if( confirm("정말 삭제하시겠습니까?" )) {
+							categoryId.remove();
+							var count = grandParent.children("ul").children("li").length;
+							if(count==0){
+								grandParent.children("a").children("i").remove();
 							}
-						}
-						else{
-							alert("하위 파일이 있으면 삭제할 수 없습니다.");
 						}
 				});
 			}
@@ -222,10 +217,8 @@
 				<div class="clear"></div>
 			</div>
 		
-		<input type="text" id="parentId" name="parentId">
-		<!-- name:<input type="text" id="selected_info" name="selected_info"> -->
-		<input type="text" id= "level" name="level">
-		<!-- cateId:<input type="text" id="categoryId" name="categoryId"> -->
+		<input type="hidden" id="parentId" name="parentId">
+		<input type="hidden" id= "level" name="level">
 	</form>
 	<!-- 이전 레벨과 현재 레벨이 다를 경우 ul -->
 	<div id="ctgr_content" >
