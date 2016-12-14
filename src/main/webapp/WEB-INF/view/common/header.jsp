@@ -40,10 +40,10 @@
 		<!-- Nav -->
 		<nav id="nav">
 		<ul>
-			<li><a href="#">Latest Post</a></li>
-			<li><a href="#">Archives</a></li>
+			<li><a href="#">강의실 관리</a></li>
+			<li><a href="#">강의 관리</a></li>
 			<li><a href="#">About Me</a></li>
-			<li><a href="#">Contact Me</a></li>
+			<li><a href="#">카테고리 관리</a></li>
 		</ul>
 		</nav>
 		<!-- class="current" -->
