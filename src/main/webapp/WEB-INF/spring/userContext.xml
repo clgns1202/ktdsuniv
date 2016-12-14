@@ -6,6 +6,7 @@
 	<bean	id="userService"
 			class="com.ktdsuniv.admin.user.service.impl.UserServiceImpl">
 		<property name="userBiz" ref="userBiz"/>		
+		<property name="commonBiz" ref="commonBiz"/>
 	</bean>
 	
 	<bean	id="userBiz"
@@ -15,7 +16,7 @@
 	
 	<bean	id="userDao"
 			class="com.ktdsuniv.admin.user.dao.impl.UserDaoImpl">
-			<property name="mongoTemplate" ref="mongoTemplate"></property>
+			<property name="mongoTemplate" ref="mongoTemplate"/>
 	</bean>
 
 

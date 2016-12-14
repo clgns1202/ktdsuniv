@@ -13,6 +13,11 @@
 		<config>src/main/webapp/WEB-INF/spring/projectContext.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/lectureContext.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/roomContext.xml</config>
+<<<<<<< HEAD
+		<config>src/main/webapp/WEB-INF/spring/commonContext.xml</config>
+=======
+		<config>src/main/webapp/WEB-INF/spring/categoryContext.xml</config>
+>>>>>>> ad51bdde0090a8b648d8dad9f1f50a70ba4b543a
 	</configs>
 	<autoconfigs>
 		<config>src/main/webapp/WEB-INF/spring/mongoContext.xml</config>
