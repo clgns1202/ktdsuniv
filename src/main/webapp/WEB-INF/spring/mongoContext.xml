@@ -4,7 +4,7 @@
 	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.8.xsd">
-
+	<!-- 10.225.152.163 -->
 	<mongo:mongo-client
 			host="10.225.152.108"
 			port="27017">
@@ -37,6 +37,16 @@
 	<bean 	id="mongoLogger"
 			class="common.mongo.logger.MongoLogger">
 		<property name="mongoDBLogger" ref="mongoDBLogger" />
+	</bean>
+	
+	<bean	id="commonBiz"
+			class="common.mongo.biz.impl.CommonBizImpl">
+			<property name="commonDao" ref="commonDao"></property>
+	</bean>
+	
+	<bean	id="commonDao"
+			class="common.mongo.dao.impl.CommonDaoImpl">
+			<property name="mongoTemplate" ref="mongoTemplate"></property>		
 	</bean>
 
 </beans>
