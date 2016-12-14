@@ -234,4 +234,12 @@ public class UserController {
 		session.invalidate();
 		return "redirect:/admin/adminSignIn";
 	}
+	
+	@RequestMapping("/index")
+	public ModelAndView viewIndexPage(){
+		ModelAndView view = new ModelAndView();
+		view.setViewName("admin/index");
+		return view;
+	}
+	
 }
