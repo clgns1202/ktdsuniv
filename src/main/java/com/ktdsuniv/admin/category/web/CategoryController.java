@@ -55,11 +55,12 @@ public class CategoryController {
 
 	@RequestMapping("/category/doDeleteCategory/{categoryId}")
 	@ResponseBody
-	public CategoriesSchema doDeleteCategoryAction(@PathVariable String categoryId) {
+	public boolean doDeleteCategoryAction(@PathVariable String categoryId) {
 		CategoriesSchema categories = null;
 		boolean isExistChild = categoryService.checkExistChild(categoryId);
 		if (categoryService.deleteCategory(categoryId)) {
-			categories = categoryService.getCategoryByName(categoryId);
+			/*categories = categoryService.getCategoryByName(categoryId);*/
+			return true;
 		} else {
 			return false;
 		}
