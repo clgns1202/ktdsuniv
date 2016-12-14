@@ -6,6 +6,7 @@
 	<bean	id="userService"
 			class="com.ktdsuniv.admin.user.service.impl.UserServiceImpl">
 		<property name="userBiz" ref="userBiz"/>		
+		<property name="commonBiz" ref="commonBiz"/>
 	</bean>
 	
 	<bean	id="userBiz"
