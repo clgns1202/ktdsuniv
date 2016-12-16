@@ -59,7 +59,7 @@ public class UserController {
 		admins.setUser(users);
 		
 		userService.addAdmin(admins);
-		return "redirect:/adminMain";
+		return "redirect:/admin/adminMain";
 	}
 	
 	@RequestMapping("/admin/adminSignIn")
