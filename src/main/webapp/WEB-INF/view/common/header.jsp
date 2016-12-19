@@ -22,6 +22,11 @@
 <script type="text/javascript">
 	$().ready(function(){
 		
+		$("#nav").on("click", "a", function(){
+			$(this).addClass("current");
+			
+		});
+		
 	});
 </script>
 
@@ -29,8 +34,7 @@
 </head>
 <body>
 
-
-	<div id="sidebar">
+<div id="sidebar">
 
 		<!-- Logo -->
 		<h1 id="logo">
@@ -40,10 +44,11 @@
 		<!-- Nav -->
 		<nav id="nav">
 		<ul>
-			<li><a href="#">강의실 관리</a></li>
-			<li><a href="#">강의 관리</a></li>
-			<li><a href="#">About Me</a></li>
-			<li><a href="#">카테고리 관리</a></li>
+			<li><a href="<c:url value="/room/roomList"/>">강의실 관리</a></li>
+			<li><a href="<c:url value="/lecture/list"/>">강의 관리</a></li>
+			<li><a href="<c:url value="/user/list"/>">회원 관리</a></li>
+			<li><a href="<c:url value="/instructor/list"/>">강사 관리</a></li>
+			<li><a href="<c:url value="/category/categoryPage"/>">카테고리 관리</a></li>
 		</ul>
 		</nav>
 		<!-- class="current" -->
@@ -66,3 +71,20 @@
 		</ul>
 
 	</div>
+
+
+	<div id="content">
+		<!-- <div class="inner">
+			<article class="box post post-excerpt">
+			<div class="info">
+				<ul class="stats">
+					<li><a href="#" class="icon fa-comment">16</a></li>
+					<li><a href="#" class="icon fa-heart">32</a></li>
+					<li><a href="#" class="icon fa-twitter">64</a></li>
+					<li><a href="#" class="icon fa-facebook">128</a></li>
+				</ul>
+			</div>
+			</article>
+		</div> -->
+	
+	

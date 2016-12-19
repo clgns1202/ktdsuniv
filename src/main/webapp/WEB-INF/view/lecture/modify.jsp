@@ -1,19 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<<<<<< HEAD
-=======
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
->>>>>>> 5a1096fd0a4b3d73d048a9828fcc1f634fe8dd8b
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-<<<<<<< HEAD
-=======
+<jsp:include page="../common/header.jsp"></jsp:include>
 	<form method="post" action="<c:url value="/lecture/doModifyLectureAction"/> ">
 		<input type="hidden" name="id" value="${lecture.id}">
 		강사: <select name="instructor.user.userName" >
@@ -58,7 +46,4 @@
 		<input type="submit" id="submitBtn" name="submitBtn" value="수정하기" /> <br/>
 		
 	</form>
-	
->>>>>>> 5a1096fd0a4b3d73d048a9828fcc1f634fe8dd8b
-</body>
-</html>
+<jsp:include page="../common/footer.jsp"></jsp:include>

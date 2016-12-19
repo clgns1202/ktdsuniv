@@ -1,19 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<<<<<< HEAD
-=======
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
->>>>>>> 5a1096fd0a4b3d73d048a9828fcc1f634fe8dd8b
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<<<<<<< HEAD
-</head>
-<body>
-
-=======
+<jsp:include page="../common/header.jsp"></jsp:include>
 <script type="text/javascript" src="<c:url value="/js/jquery-3.1.1.min.js"/>"></script>
 <script type="text/javascript">
 	
@@ -30,8 +18,6 @@
 	});
 	
 </script>
-</head>
-<body>
 
 	<h1>${lecture.lectureName}</h1>
 	<h5>강사: ${lecture.instructor.user.userName}</h5>
@@ -46,6 +32,4 @@
 	<input type="button" id="deleteBtn" name="deleteBtn" value="삭제" />
 	<input type="button" id="modifyBtn" name="modifyBtn" value="수정" />
 
->>>>>>> 5a1096fd0a4b3d73d048a9828fcc1f634fe8dd8b
-</body>
-</html>
+<jsp:include page="../common/footer.jsp"></jsp:include>
