@@ -17,7 +17,7 @@
 		});
 		
 		$("#addBtn").click(function(){
-			location.href="<c:url value="/admin/instructorRegister"/>";
+			location.href="<c:url value="/instructor/instructorRegister"/>";
 		});
 	});
 </script>

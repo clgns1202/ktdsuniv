@@ -22,10 +22,10 @@
 <script type="text/javascript">
 	$().ready(function(){
 		
-		$("#nav").on("click", "a", function(){
-			$(this).addClass("current");
-			
-		});
+		var path = window.location.pathname;
+		var menu = path.split("/");
+		
+		$("#"+menu[2]).parent().addClass("current");
 		
 	});
 </script>
@@ -44,11 +44,11 @@
 		<!-- Nav -->
 		<nav id="nav">
 		<ul>
-			<li><a href="<c:url value="/room/roomList"/>">강의실 관리</a></li>
-			<li><a href="<c:url value="/lecture/list"/>">강의 관리</a></li>
-			<li><a href="<c:url value="/user/list"/>">회원 관리</a></li>
-			<li><a href="<c:url value="/instructor/list"/>">강사 관리</a></li>
-			<li><a href="<c:url value="/category/categoryPage"/>">카테고리 관리</a></li>
+			<li><a id="room" href="<c:url value="/room/roomList"/>">강의실 관리</a></li>
+			<li><a id="lecture" href="<c:url value="/lecture/list"/>">강의 관리</a></li>
+			<li><a id="user" href="<c:url value="/user/list"/>">회원 관리</a></li>
+			<li><a id="instructor" href="<c:url value="/instructor/list"/>">강사 관리</a></li>
+			<li><a id="category" href="<c:url value="/category/categoryPage"/>">카테고리 관리</a></li>
 		</ul>
 		</nav>
 		<!-- class="current" -->
