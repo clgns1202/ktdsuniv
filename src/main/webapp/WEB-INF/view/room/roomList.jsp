@@ -18,8 +18,9 @@
 <body>
 	<h3>강의실 목록</h3>
 	<c:forEach items="${roomList.pageList}" var="room">
-		<div>${room.roomNumber} 
-		<a href="<c:url value="/room/delete/${room.id}"/>" style="font-size: 12px">삭제</a></div>	
+		<div>
+		<a href="<c:url value="/room/detail/${room.id}"/>">${room.roomNumber} </a>
+		</div>	
 	</c:forEach>
 	<br/>
 	<input type="button" value="강의실 추가" id="addBtn" name="addBtn">

@@ -2,18 +2,20 @@ package com.ktdsuniv.admin.room.dao.impl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 
 import com.ktdsuniv.admin.room.dao.RoomDao;
-
 import common.support.mongo.MongoTemplateSupport;
 import room.schema.RoomsSchema;
 
 public class RoomDaoImpl extends MongoTemplateSupport implements RoomDao {
-
+	
+	private Logger logger = LoggerFactory.getLogger(RoomDaoImpl.class);
+	
 	@Override
 	public void addRoom(RoomsSchema room) {
 		getMongo().save(room);
@@ -37,5 +39,34 @@ public class RoomDaoImpl extends MongoTemplateSupport implements RoomDao {
 		
 		
 	}
+	
+	@Override
+	public RoomsSchema getRoomById(String id) {
+		Criteria criteria = new Criteria("_id");
+		criteria.is(id);
+		
+		Query query = new Query(criteria);
+		return getMongo().findOne(query, RoomsSchema.class);
+	}
+	
+	@Override
+	public void modifyRoom(RoomsSchema originalRoom) {
+		getMongo().save(originalRoom);
+	}
+
+	@Override
+	public int checkDuplicateRoomNumber(String roomNumber) {
+		Criteria criteria = new Criteria("roomNumber");
+		criteria.is(roomNumber);
+		
+		Query query = new Query(criteria);
+		
+		return (int) getMongo().count(query, RoomsSchema.class);
+		
+	}
+
+
+
+	
 
 }
