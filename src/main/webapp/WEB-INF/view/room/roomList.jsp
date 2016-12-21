@@ -22,7 +22,15 @@
 		<a href="<c:url value="/room/detail/${room.id}"/>">${room.roomNumber} </a>
 		</div>	
 	</c:forEach>
+	
+	<br/>
+	
+	<form id="searchForm" name="searchForm">
+		${paging}
+	
+	</form>
 	<br/>
 	<input type="button" value="강의실 추가" id="addBtn" name="addBtn">
+	
 </body>
 </html>

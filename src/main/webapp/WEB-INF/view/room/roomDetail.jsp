@@ -19,6 +19,9 @@
 				return;
 			}
 		});
+		$("#backBtn").click(function(){
+			location.href="<c:url value="/room/roomList"/>";
+		});
 	});
 </script>
 </head>
@@ -77,6 +80,7 @@
 	
 	</table>
 	<input type="button" value="수정" id="modifyBtn" name="modifyBtn" > 
-	<input type="button" value="삭제" id="deleteBtn" name="deleteBtn" > 
+	<input type="button" value="삭제" id="deleteBtn" name="deleteBtn" > <br/>
+	<input type="button" value="뒤로가기" id="backBtn" name="backBtn" > 
 </body>
 </html>

@@ -8,12 +8,36 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="<c:url value="/js/jquery-3.1.1.min.js"/>"></script>
 <script type="text/javascript">
-
+$().ready(function() {
+	$("#modifyBtn").click(function(){
+		if($("#roomNumber").val() == ""){
+			alert("강의실을 입력해주세요");
+		}else if($("#seatCount").val() == ""){
+			alert("좌석수를 입력해주세요");
+		}else{
+			$.post("<c:url value='/room/checkDuplicateRoomNumber'/>",{"roomNumber" : $("#roomNumber").val()}, function(data){
+							if($("#roomNumber").val() == ${room.roomNumber}){
+								$.post("<c:url value='/room/doModifyRoom/${room.id}'/>" , $( "#modifyForm" ).serialize(), function(data){
+									 location.href= "<c:url value='/room/roomList'/>"; 
+								});
+			                }
+							else if(data==true){
+								alert("강의실 이릉이 중복됩니다.");
+							} 
+							else {
+								$.post("<c:url value='/room/doModifyRoom/${room.id}'/>" , $( "#modifyForm" ).serialize(), function(data){
+									 location.href= "<c:url value='/room/roomList'/>"; 
+								});
+							}
+			});
+		}	
+	});
+});
 </script>
 </head>
 <body>
 	<h3>강의실 정보 수정</h3>
-	<form method="post" action="<c:url value="/room/doModifyRoom/${room.id}"/>" id="modifyForm" name="modifyForm" >
+	<form method="post" id="modifyForm" name="modifyForm" >
 		<input type="hidden" value="${room.id}"> 
 		호실 : <input type="text" id="roomNumber" name="roomNumber" value="${room.roomNumber}"><br/>
 		전체 좌석 수 : <input type="text" id="seatCount" name="seatCount" value="${room.seatCount}"><br/>
@@ -79,7 +103,7 @@
 		</c:forEach>
 	
 	</table>
-		<input type="submit" value="수정">
+		<input type="button" value="수정" id="modifyBtn" name="modifyBtn">
 	</form>
 </body>
 </html>
