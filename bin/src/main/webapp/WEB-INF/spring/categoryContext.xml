@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean	id="categoryService"
+			class="com.ktdsuniv.admin.category.service.impl.CategoryServiceImpl">
+		<property name="categoryBiz" ref="categoryBiz" />
+		<property name="commonBiz" ref="commonBiz"></property>
+	</bean>
+	
+	<bean	id="categoryBiz"
+			class="com.ktdsuniv.admin.category.biz.impl.CategoryBizImpl">
+		<property name="categoryDao" ref="categoryDao" />
+	</bean>
+	
+	<bean	id="categoryDao"
+			class="com.ktdsuniv.admin.category.dao.impl.CategoryDaoImpl">
+		<property name="mongoTemplate" ref="mongoTemplate" />		
+	</bean>
+
+</beans>

@@ -4,12 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <link rel="stylesheet" type="text/css" href="/AdminPage/css/decorateAdmin.css" />
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>category</title>
-</head>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript" src="/AdminPage/js/jquery-3.1.1.min.js"></script>
+<jsp:include page="../common/header.jsp"></jsp:include>
 <script type="text/javascript">
 	$().ready(function(){
 		//카테고리 아이디를 설정한다.
@@ -201,7 +196,6 @@
 		}
 	}
 </script>
-<body>
 	<h3>카테고리관리</h3>
 
 	<form id="categoryForm" name="categoryForm">
@@ -246,5 +240,4 @@
 	</ul>
 	</div>
 	</div>
-</body>
-</html>
+<jsp:include page="../common/footer.jsp"></jsp:include>

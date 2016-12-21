@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean	id="userService"
+			class="com.ktdsuniv.admin.user.service.impl.UserServiceImpl">
+		<property name="userBiz" ref="userBiz"/>		
+		<property name="commonBiz" ref="commonBiz"/>
+	</bean>
+	
+	<bean	id="userBiz"
+			class="com.ktdsuniv.admin.user.biz.impl.UserBizImpl">
+		<property name="userDao" ref="userDao"/>		
+	</bean>
+	
+	<bean	id="userDao"
+			class="com.ktdsuniv.admin.user.dao.impl.UserDaoImpl">
+			<property name="mongoTemplate" ref="mongoTemplate"/>
+	</bean>
+
+
+</beans>
