@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<jsp:include page="../common/header.jsp"></jsp:include>
 <script type="text/javascript" src="<c:url value="/js/jquery-3.1.1.min.js"/>"></script>
 <script type="text/javascript">
 	$().ready(function(){
@@ -19,12 +15,10 @@
 		});
 	});
 </script>
-</head>
-<body>
 	<p>강사 디테일</p>
 	아이디: ${instructor.user.userId}<br/>
 	이름 :	${instructor.user.userName}<br/>
-	생년월일 : ${instructor.user.birthday}<br/>
+	<%-- 생년월일 : ${instructor.user.birthday}<br/> --%>
 	성별 : 
 	<c:choose>
 		<c:when test="${instructor.user.gender eq 1 or instructor.user.gender eq 3}">
@@ -41,5 +35,4 @@
 	수정일 : ${instructor.user.modifiedDate}<br/>
 	<input type="button" value="수정" id="modifyBtn">
 	<input type="button" value="삭제" id="deleteBtn">
-</body>
-</html>
+<jsp:include page="../common/footer.jsp"></jsp:include>

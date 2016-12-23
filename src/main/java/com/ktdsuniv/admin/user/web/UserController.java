@@ -46,14 +46,14 @@ public class UserController {
 		return view;
 	}
 	
-	@RequestMapping("/admin/instructorRegister")
+	@RequestMapping("/instructor/instructorRegister")
 	public ModelAndView viewInstructorRegisterPage() {		
 		ModelAndView view = new ModelAndView();
 		view.setViewName("/instructor/instructorRegister");
 		return view;		
 	}
 	
-	@RequestMapping("/admin/instructorDoRegister")
+	@RequestMapping("/instructor/instructorDoRegister")
 	public String doInstructorRegister(UsersSchema users, @RequestParam String agency) {
 		InstructorsSchema instructors = new InstructorsSchema();
 		instructors.setAgency(agency);
@@ -234,4 +234,12 @@ public class UserController {
 		session.invalidate();
 		return "redirect:/admin/adminSignIn";
 	}
+	
+	@RequestMapping("/index")
+	public ModelAndView viewIndexPage(){
+		ModelAndView view = new ModelAndView();
+		view.setViewName("admin/index");
+		return view;
+	}
+	
 }

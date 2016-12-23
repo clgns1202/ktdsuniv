@@ -58,13 +58,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void addInstructor(InstructorsSchema instructors) {
-		instructors.getUser().setBirthday(new Date(instructors.getUser().getBirthday().getTime() + (long) ( 1000 * 60 * 60 * 9 )));
+		//instructors.getUser().setBirthday(new Date(instructors.getUser().getBirthday().getTime() + (long) ( 1000 * 60 * 60 * 9 )));
 		userBiz.addInstructor(instructors);
 	}
 
 	@Override
 	public void addAdmin(AdminsSchema admins) {
-		admins.getUser().setBirthday(new Date(admins.getUser().getBirthday().getTime() + (long) ( 1000 * 60 * 60 * 9 )));
+		//admins.getUser().setBirthday(new Date(admins.getUser().getBirthday().getTime() + (long) ( 1000 * 60 * 60 * 9 )));
 		userBiz.addAdmin(admins);
 	}
 

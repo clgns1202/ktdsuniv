@@ -15,7 +15,7 @@
 		<tr>
 			<td>아이디</td>
 			<td>이름</td>
-			<td>생년월일</td>
+			<!-- <td>생년월일</td> -->
 			<td>성별</td>
 			<td>성적</td>
 			<td>전화번호</td>
@@ -26,7 +26,7 @@
 				<tr>	
 					<td>${user.userId}</td>
 					<td>${user.userName}</td>
-					<td>${user.birthday}</td>
+					<%-- <td>${user.birthday}</td> --%>
 					<td>${user.gender}</td>
 					<td>${user.address}</td>
 					<td>${user.phoneNumber}</td>

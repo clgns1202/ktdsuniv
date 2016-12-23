@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<jsp:include page="../common/header.jsp"></jsp:include>
 <script type="text/javascript" src="<c:url value="/js/jquery-3.1.1.min.js"/>"></script>
 <script type="text/javascript">
 	$().ready(function(){
@@ -28,7 +24,7 @@
 			<td></td>
 			<td>아이디</td>
 			<td>이름</td>
-			<td>생년월일</td>
+			<!-- <td>생년월일</td> -->
 			<td>성별</td>
 			<td>성적</td>
 			<td>전화번호</td>
@@ -41,7 +37,7 @@
 					<td><input type="checkbox" name="users" class="users" value="${user.id}"></td>
 					<td><a href="<c:url value="/user/detail/"/>${user.id}">${user.userId}</a></td>
 					<td>${user.userName}</td>
-					<td>${user.birthday}</td>
+					<%-- <td>${user.birthday}</td> --%>
 					<td>${user.gender}</td>
 					<td>${user.address}</td>
 					<td>${user.phoneNumber}</td>
@@ -62,5 +58,4 @@
 		<input type="button" id="searchBtn" value="검색" onclick="movePage(0)">
 	</form>
 
-</body>
-</html>
+<jsp:include page="../common/footer.jsp"></jsp:include>

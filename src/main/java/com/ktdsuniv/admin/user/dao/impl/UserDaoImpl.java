@@ -61,7 +61,7 @@ public class UserDaoImpl extends MongoTemplateSupport implements UserDao {
 		 */
 		UsersSchema originalUser = getMongo().findOne(query, UsersSchema.class, "users");
 		originalUser.setAddress(usersSchema.getAddress());
-		originalUser.setBirthday(usersSchema.getBirthday());
+		//originalUser.setBirthday(usersSchema.getBirthday());
 		originalUser.setGender(usersSchema.getGender());
 		originalUser.setModifiedDate(new Date());
 		originalUser.setPhoneNumber(usersSchema.getPhoneNumber());
@@ -85,7 +85,7 @@ public class UserDaoImpl extends MongoTemplateSupport implements UserDao {
 		InstructorsSchema originalInstructor = getMongo().findOne(query, InstructorsSchema.class, "instructors");
 		originalInstructor.setAgency(instructor.getAgency());
 		originalInstructor.getUser().setAddress(instructor.getUser().getAddress());
-		originalInstructor.getUser().setBirthday(instructor.getUser().getBirthday());
+		//originalInstructor.getUser().setBirthday(instructor.getUser().getBirthday());
 		originalInstructor.getUser().setGender(instructor.getUser().getGender());
 		originalInstructor.getUser().setModifiedDate(new Date());
 		originalInstructor.getUser().setPhoneNumber(instructor.getUser().getPhoneNumber());

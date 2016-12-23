@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<jsp:include page="../common/header.jsp"></jsp:include>
 <script type="text/javascript" src="<c:url value="/js/jquery-3.1.1.min.js"/>"></script>
 <script type="text/javascript">
 	$().ready(function(){
@@ -19,16 +15,18 @@
 				}).submit();
 			}
 		});
+		
+		$("#addBtn").click(function(){
+			location.href="<c:url value="/instructor/instructorRegister"/>";
+		});
 	});
 </script>
-</head>
-<body>
 	<table>
 		<tr>
 			<td></td>
 			<td>아이디</td>
 			<td>이름</td>
-			<td>생년월일</td>
+			<!-- <td>생년월일</td> -->
 			<td>성별</td>
 			<td>성적</td>
 			<td>전화번호</td>
@@ -42,7 +40,7 @@
 					<td><input type="checkbox" name="users" class="users" value="${instructor.id}"></td>
 					<td><a href="<c:url value="/instructor/detail/"/>${instructor.id}">${instructor.user.userId}</a></td>
 					<td>${instructor.user.userName}</td>
-					<td>${instructor.user.birthday}</td>
+					<%-- <td>${instructor.user.birthday}</td> --%>
 					<td>${instructor.user.gender}</td>
 					<td>${instructor.user.address}</td>
 					<td>${instructor.user.phoneNumber}</td>
@@ -53,6 +51,7 @@
 			</c:forEach>
 		</form>
 	</table>
+		<input type="button" value="등록" id="addBtn"/>
 		<input type="button" value="삭제" id="deleteBtn">
 	<form name="searchForm" id="searchForm">
 		${paging}
@@ -64,5 +63,4 @@
 		<input type="button" id="searchBtn" value="검색" onclick="movePage(0)">
 	</form>
 
-</body>
-</html>
+<jsp:include page="../common/footer.jsp"></jsp:include>
