@@ -2,18 +2,14 @@ package com.ktdsuniv.admin.room.web;
 
 import java.util.List;
 
-<<<<<<< HEAD
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-=======
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
->>>>>>> 4384d6ab4839f5e5581f56202ccc9c86ec4ce2fb
+
+
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -66,7 +62,7 @@ public class RoomController {
 		return "redirect:/room/roomList";
 	}
 	
-<<<<<<< HEAD
+
 	@RequestMapping("room/detail/{id}")
 	public ModelAndView viewDetailRoomPage(@PathVariable String id) {
 		ModelAndView view = new ModelAndView();	
@@ -92,16 +88,13 @@ public class RoomController {
 		return "redirect:/room/detail/{id}";
 	}
 	
-	@RequestMapping("/room/deleteRoom/{id}")
-=======
+
 	@RequestMapping("/room/delete/{id}")
->>>>>>> 4384d6ab4839f5e5581f56202ccc9c86ec4ce2fb
 	public String doDeleteAction(@PathVariable String id){
 		roomService.deleteRoom(id);
 		return "redirect:/room/roomList";
 	}
 	
-<<<<<<< HEAD
 	@RequestMapping("/room/checkDuplicateRoomNumber")
 	@ResponseBody
 	public boolean checkDuplicateRoomNumber(@RequestParam String roomNumber ) {
@@ -109,8 +102,4 @@ public class RoomController {
 		return isSuccess;
 	}
 	
-	
-	
-=======
->>>>>>> 4384d6ab4839f5e5581f56202ccc9c86ec4ce2fb
 }

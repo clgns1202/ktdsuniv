@@ -12,10 +12,8 @@ import common.pageVO.SearchVO;
 import common.util.pager.Pager;
 import common.util.pager.PagerFactory;
 import room.schema.RoomsSchema;
-<<<<<<< HEAD
+
 import room.schema.Seats;
-=======
->>>>>>> 4384d6ab4839f5e5581f56202ccc9c86ec4ce2fb
 
 public class RoomServiceImpl implements RoomService {
 
@@ -25,8 +23,6 @@ public class RoomServiceImpl implements RoomService {
 	public void setRoomBiz(RoomBiz roomBiz) {
 		this.roomBiz = roomBiz;
 	}
-
-<<<<<<< HEAD
 	
 	public void setCommonBiz(CommonBiz commonBiz) {
 		this.commonBiz = commonBiz;
@@ -71,44 +67,5 @@ public class RoomServiceImpl implements RoomService {
 	public boolean checkDuplicateRoomNumber(String roomNumber) {
 		return roomBiz.checkDuplicateRoomNumber(roomNumber);
 	}
-
-
-	
-
-
-	
-
-
-	
-=======
-	
-	public void setCommonBiz(CommonBiz commonBiz) {
-		this.commonBiz = commonBiz;
-	}
-
-
-	@Override
-	public void addRoom(RoomsSchema room) {
-		roomBiz.addRoom(room);
-		
-	}
-
-
-	@Override
-	public PageListVO getRoomList(SearchVO searchVO) {
-		  Pager pager = PagerFactory.getPager(Pager.OTHER);
-	      return commonBiz.getMongoList(searchVO, pager, RoomsSchema.class);
-	}
-
-
-	@Override
-	public void deleteRoom(String id) {
-		roomBiz.deleteRoom(id);
-		
-	}
-
-	
->>>>>>> 4384d6ab4839f5e5581f56202ccc9c86ec4ce2fb
-
 	
 }
