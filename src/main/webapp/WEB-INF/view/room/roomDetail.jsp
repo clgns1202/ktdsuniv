@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<jsp:include page="../common/header.jsp"></jsp:include>
 <script type="text/javascript" src="<c:url value="/js/jquery-3.1.1.min.js"/>"></script>
 <script type="text/javascript">
 	$().ready(function() {
@@ -24,8 +20,6 @@
 		});
 	});
 </script>
-</head>
-<body>
 	강의실 : ${room.roomNumber}
 	좌석 수 : ${room.seatCount }
 
@@ -82,5 +76,7 @@
 	<input type="button" value="수정" id="modifyBtn" name="modifyBtn" > 
 	<input type="button" value="삭제" id="deleteBtn" name="deleteBtn" > <br/>
 	<input type="button" value="뒤로가기" id="backBtn" name="backBtn" > 
+	
+	<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 </html>

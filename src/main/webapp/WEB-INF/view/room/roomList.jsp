@@ -14,7 +14,7 @@
 	<h3>강의실 목록</h3>
 	<c:forEach items="${roomList.pageList}" var="room">
 		<div>
-		<a href="<c:url value="/room/detail/${room.id}"/>">${room.roomNumber} </a>
+		<a href="<c:url value="/room/detail/${room.id}"/>">${room.roomNumber}  </a>( 좌석 ${room.seatCount } )
 		</div>	
 	</c:forEach>
 	<br/>
