@@ -24,7 +24,7 @@
 			<td></td>
 			<td>아이디</td>
 			<td>이름</td>
-			<td>생년월일</td>
+			<!-- <td>생년월일</td> -->
 			<td>성별</td>
 			<td>성적</td>
 			<td>전화번호</td>
@@ -37,7 +37,7 @@
 					<td><input type="checkbox" name="users" class="users" value="${user.id}"></td>
 					<td><a href="<c:url value="/user/detail/"/>${user.id}">${user.userId}</a></td>
 					<td>${user.userName}</td>
-					<td>${user.birthday}</td>
+					<%-- <td>${user.birthday}</td> --%>
 					<td>${user.gender}</td>
 					<td>${user.address}</td>
 					<td>${user.phoneNumber}</td>

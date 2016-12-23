@@ -18,7 +18,7 @@
 	<p>강사 디테일</p>
 	아이디: ${instructor.user.userId}<br/>
 	이름 :	${instructor.user.userName}<br/>
-	생년월일 : ${instructor.user.birthday}<br/>
+	<%-- 생년월일 : ${instructor.user.birthday}<br/> --%>
 	성별 : 
 	<c:choose>
 		<c:when test="${instructor.user.gender eq 1 or instructor.user.gender eq 3}">

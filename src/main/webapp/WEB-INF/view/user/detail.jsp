@@ -18,7 +18,7 @@
 	<p>유저 디테일</p>
 	아이디: ${user.userId}<br/>
 	이름 :	${user.userName}<br/>
-	생년월일 : ${user.birthday}<br/>
+	<%-- 생년월일 : ${user.birthday}<br/> --%>
 	성별 : 
 	<c:choose>
 		<c:when test="${user.gender eq 1 or user.gender eq 3}">

@@ -47,7 +47,7 @@
 		아이디 : <input type="text" name="userId" id="userId" value="${user.userId}" /><br/>
 		비밀번호 : <input type="password" name="userPassword" id="userPassword"/><br/>
 		이름 : <input type="text" name="userName" id="userName" style="width: 100px;" value="${user.userName}" /><br/>
-		주민번호 : <input type="text" name="birthday" id="birthday" style="width: 80px;" value="${user.birthday}"/> - <input type="text" name="gender" id="gender" style="width: 15px;" value="${user.gender}"/>* * * * * * ex) 1988-12-13<br/>
+		주민번호 : <input type="text" name="birthday" id="birthday" style="width: 80px;" value="<%-- ${user.birthday} --%>"/> - <input type="text" name="gender" id="gender" style="width: 15px;" value="${user.gender}"/>* * * * * * ex) 1988-12-13<br/>
 		핸드폰 : <input type="text" name="phoneNumber" id="phoneNumber" value="${user.phoneNumber}" /><br/>		
 		주소 : <input type="text" name="address" id="address" style="width: 500px;" value="${user.address}"/><br/>		
 		<input type="button" id="modifyBtn" value="수정" /><br/>

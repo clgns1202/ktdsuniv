@@ -48,7 +48,7 @@
 		아이디 : <input type="text" name="userId" id="userId" value="${instructor.user.userId}" /><br/>
 		비밀번호 : <input type="password" name="userPassword" id="userPassword"/><br/>
 		이름 : <input type="text" name="userName" id="userName" style="width: 100px;" value="${instructor.user.userName}" /><br/>
-		주민번호 : <input type="text" name="birthday" id="birthday" style="width: 80px;" value="${instructor.user.birthday}"/> - <input type="text" name="gender" id="gender" style="width: 15px;" value="${instructor.user.gender}"/>* * * * * * ex) 1988-12-13<br/>
+		주민번호 : <input type="text" name="birthday" id="birthday" style="width: 80px;" value="<%-- ${instructor.user.birthday} --%>"/> - <input type="text" name="gender" id="gender" style="width: 15px;" value="${instructor.user.gender}"/>* * * * * * ex) 1988-12-13<br/>
 		핸드폰 : <input type="text" name="phoneNumber" id="phoneNumber" value="${instructor.user.phoneNumber}" /><br/>		
 		주소 : <input type="text" name="address" id="address" style="width: 500px;" value="${instructor.user.address}"/><br/>	
 		소속 : <input type="text" name="agency" id="agency" value="${instructor.agency}" /><br/><br/>	
