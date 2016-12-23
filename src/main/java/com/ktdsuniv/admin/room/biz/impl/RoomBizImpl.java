@@ -1,5 +1,6 @@
 package com.ktdsuniv.admin.room.biz.impl;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,11 +8,18 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+=======
+import java.util.List;
+
+>>>>>>> 4384d6ab4839f5e5581f56202ccc9c86ec4ce2fb
 import com.ktdsuniv.admin.room.biz.RoomBiz;
 import com.ktdsuniv.admin.room.dao.RoomDao;
 
 import room.schema.RoomsSchema;
+<<<<<<< HEAD
 import room.schema.Seats;
+=======
+>>>>>>> 4384d6ab4839f5e5581f56202ccc9c86ec4ce2fb
 
 public class RoomBizImpl implements RoomBiz {
 
@@ -100,5 +108,21 @@ public class RoomBizImpl implements RoomBiz {
 	
 
 
+
+	@Override
+	public void addRoom(RoomsSchema room) {
+		roomDao.addRoom(room);
+		
+	}
+
+	@Override
+	public List<RoomsSchema> roomList() {
+		return roomDao.roomList();
+	}
+
+	@Override
+	public void deleteRoom(String id) {
+		roomDao.deleteRoom(id);
+	}
 
 }

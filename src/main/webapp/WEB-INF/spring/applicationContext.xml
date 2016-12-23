@@ -16,10 +16,10 @@
 	<!-- mapping="/js/**" /js/jquery/jquery-3.1.11.js -->
 	
 	<mvc:resources location="/WEB-INF/resources/js/" mapping="/js/**" />
-	<mvc:resources location="/WEB-INF/resources/css/"
-		mapping="/css/**" />
+	<mvc:resources location="/WEB-INF/resources/css/" mapping="/css/**" />
 	<mvc:resources location="/WEB-INF/resources/img/"
 		mapping="/img/**" />
+	<mvc:resources location="/WEB-INF/resources/html5up-striped/" mapping="/striped/**"/>
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -60,6 +60,11 @@
 	<bean	id="seatController"
 			class="com.ktdsuniv.admin.room.web.SeatController">
 		<property name="seatService" ref="seatService"/>		
+	</bean>
+	
+	<bean	id="categoryController"
+			class="com.ktdsuniv.admin.category.web.CategoryController">
+		<property name="categoryService" ref="categoryService" />		
 	</bean>
 
 </beans>

@@ -4,8 +4,11 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+<<<<<<< HEAD
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
+=======
+>>>>>>> 4384d6ab4839f5e5581f56202ccc9c86ec4ce2fb
         <dependent-module archiveName="KtdsSchema.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/KtdsSchema/KtdsSchema">
             <dependency-type>uses</dependency-type>
         </dependent-module>

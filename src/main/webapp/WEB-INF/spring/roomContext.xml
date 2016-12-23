@@ -5,8 +5,13 @@
 
 	<bean	id="roomService"
 			class="com.ktdsuniv.admin.room.service.impl.RoomServiceImpl">
+<<<<<<< HEAD
 		<property name="roomBiz" ref="roomBiz"/>
 		<property name="commonBiz" ref="commonBiz"/>		
+=======
+		<property name="roomBiz" ref="roomBiz"/>		
+		<property name="commonBiz" ref="commonBiz"/>
+>>>>>>> 4384d6ab4839f5e5581f56202ccc9c86ec4ce2fb
 	</bean>
 
 	<bean	id="roomBiz"

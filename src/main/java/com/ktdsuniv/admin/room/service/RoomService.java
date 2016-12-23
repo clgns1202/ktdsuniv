@@ -16,6 +16,7 @@ public interface RoomService {
 
 	public void deleteRoom(String id);
 
+<<<<<<< HEAD
 
 	public RoomsSchema getRoomById(String id);
 
@@ -26,4 +27,6 @@ public interface RoomService {
 	public boolean checkDuplicateRoomNumber(String roomNumber);
 
 
+=======
+>>>>>>> 4384d6ab4839f5e5581f56202ccc9c86ec4ce2fb
 }
